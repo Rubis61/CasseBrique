@@ -15,8 +15,10 @@ namespace Casse_Brique
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// 
+        
         [STAThread]
-        static void Main()
+        static void Main()//zkcujzlkcj
         {
             using (var game = new Game1())
                 game.Run();
