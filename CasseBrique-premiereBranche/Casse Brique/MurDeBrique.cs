@@ -23,6 +23,9 @@ namespace Casse_Brique
             this.game = game;
             briques = new List<Brique>();
 
+            int largeurFenetre = game.getWidth();
+            int hauteurFenetre = game.getHeight();
+
             rectConteneur = new Rectangle(50, 50, 500, 100);
         }
 
@@ -39,6 +42,7 @@ namespace Casse_Brique
             int posXlastBrique = 0;
             int posXcurrentBrique = 0;
             int largeurBrique = briques[0].getRectangle().Width;
+            
 
             for( int i=0 ; i<briques.Count ; i++ )
             {

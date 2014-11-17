@@ -76,7 +76,7 @@ namespace Casse_Brique
                     {
                         _dirY = -1; // projection vers le bas
                     }
-                } 
+                }
                 /*
                 if( milieuBalle.X < collideWithBrique.X ) // Collision 
                 {
