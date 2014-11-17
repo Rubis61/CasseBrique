@@ -44,7 +44,7 @@ namespace Casse_Brique
             {
                 if (i != 0) posXlastBrique = briques[i - 1].getRectangle().X;
                 posXcurrentBrique = posXlastBrique + distanceEntreBriques + briques[0].getRectangle().Width;
-                briques[i].Initialize(posXcurrentBrique, 50, 64, 32);
+                briques[i].Initialize(posXcurrentBrique, 150, 64, 32);
             }
         }
 

@@ -24,37 +24,61 @@ namespace Casse_Brique
             int width = game.getWidth();
             int height = game.getHeight();
 
-            if (_rectangle.X <= 0)
+            // Intersection avec les bords de l'écran
+            if (_rectangle.X <= 0) // bord gauche
             {
                 _dirX = 1;
             }
-            else if ((_rectangle.X + _rectangle.Width >= width))
+            else if ((_rectangle.X + _rectangle.Width >= width)) // bord droit
             {
                 _dirX = -1;
             }
-            if ( _rectangle.Y <= 0 )
+            if ( _rectangle.Y <= 0 ) // bord haut
             {
                 _dirY = 1;
             }
-            else if ((_rectangle.Y + _rectangle.Height) >= height)
+            else if ((_rectangle.Y + _rectangle.Height) >= height) // bord bas
             {
                 _dirY = -1;
             }
 
-            if (game.Raquette.getRectangle().Intersects(_rectangle))
+            if (game.Raquette.getRectangle().Intersects(_rectangle)) // Détection collision entre la balle et la raquete
             {
                 game.Log = "Intersection !!";
                 _dirY *= -1;
             }
             else game.Log = "";
 
-            Rectangle collideWithBrique = game.murDeBrique.isCollisionWithBrique(_rectangle);
+            Rectangle collideWithBrique = game.murDeBrique.isCollisionWithBrique(_rectangle); // demande si il y a collision entre balle et une des briques du mur de brique ( rectangle null si aucune collision )
 
-            if( !collideWithBrique.IsEmpty )
+            if( !collideWithBrique.IsEmpty ) // Collision entre la balle et une brique OK
             {
                 Vector2 milieuBalle = new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2);
 
-                if( milieuBalle.X < collideWithBrique.X )
+                if (_dirX == 1) // Direction de la balle vers la droite
+                {
+                    if (collideWithBrique.X > milieuBalle.X) // Collision bord gauche de la brique
+                    {
+                        _dirX = -1; // projection vers la gauche
+                    }
+                    else if (collideWithBrique.X < milieuBalle.X) // Collision bord bas
+                    {
+                        _dirY *= -1; // projection vers l'opposé vertical
+                    }
+                }
+                else // Direction de la balle vers la gauche
+                {
+                    if (collideWithBrique.Y < milieuBalle.Y) // Collision bord droit
+                    {
+                        _dirX *= -1; // projection vers l'opposé vertical
+                    }
+                    else if (collideWithBrique.Y > milieuBalle.Y) // Collision bord haut
+                    {
+                        _dirY = -1; // projection vers le bas
+                    }
+                } 
+                /*
+                if( milieuBalle.X < collideWithBrique.X ) // Collision 
                 {
                     _dirX = -1;
                 }
@@ -69,7 +93,7 @@ namespace Casse_Brique
                 else if( milieuBalle.Y < collideWithBrique.Y )
                 {
                     _dirY = -1;
-                }
+                }*/
             }
 
             base.Update(gametime, keyboardState);
