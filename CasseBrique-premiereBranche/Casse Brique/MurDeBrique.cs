@@ -26,12 +26,12 @@ namespace Casse_Brique
             int largeurFenetre = game.getWidth();
             int hauteurFenetre = game.getHeight();
 
-            rectConteneur = new Rectangle(50, 50, 500, 100);
+            rectConteneur = new Rectangle(50, 50, largeurFenetre-50, hauteurFenetre*2/3);
         }
 
         public void générerMurDeBriqueDeBase()
         {
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 19; i++)
             {
                 briques.Add(new Brique(game, 0, 0, 0));
             }
@@ -40,15 +40,24 @@ namespace Casse_Brique
         public void initialiserBriques()
         {
             int posXlastBrique = 0;
-            int posXcurrentBrique = 0;
-            int largeurBrique = briques[0].getRectangle().Width;
-            
+            int posXcurrentBrique = rectConteneur.X;
+            int largeurBrique = 256;//briques[0].getRectangle().Width;
+            int hauteurBrique = 128;//briques[0].getRectangle().Height;
+            int nbrMaxBriquesParLignes = rectConteneur.Width / (largeurBrique + distanceEntreBriques);
 
+            int posY = rectConteneur.Y;
+            int ligne = 0;
             for( int i=0 ; i<briques.Count ; i++ )
             {
-                if (i != 0) posXlastBrique = briques[i - 1].getRectangle().X;
-                posXcurrentBrique = posXlastBrique + distanceEntreBriques + briques[0].getRectangle().Width;
-                briques[i].Initialize(posXcurrentBrique, 150, 64, 32);
+                if (i != 0) posXlastBrique = briques[i - 1].getRectangle().X; // position de la dernière brique
+                if (i == nbrMaxBriquesParLignes) // cas maximum de brique dans une ligne atteint = saut d'une ligne avec espace entre
+                { 
+                    ligne++;
+                    posY += hauteurBrique + distanceEntreBriques; // calcul prochaine position en Y
+                }
+
+                posXcurrentBrique = posXlastBrique + distanceEntreBriques + briques[0].getRectangle().Width; // Calcul de la position de la brique actuelle grace à la prédédente
+                briques[i].Initialize(posXcurrentBrique, posY, 64, 32);
             }
         }
 
