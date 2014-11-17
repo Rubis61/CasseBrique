@@ -13,14 +13,17 @@ namespace Casse_Brique
 {
     public class MurDeBrique
     {
-        public Rectangle Rectangle { get; set; }
+        public Rectangle rectConteneur { get; set; }
         public List<Brique> briques { get; set; }
+        private const int distanceEntreBriques = 15;
         private Game1 game;
 
         public MurDeBrique(Game1 game)
         {
             this.game = game;
             briques = new List<Brique>();
+
+            rectConteneur = new Rectangle(50, 50, 500, 100);
         }
 
         public void générerMurDeBriqueDeBase()
@@ -31,11 +34,17 @@ namespace Casse_Brique
             }
         }
 
-        public void initialiserBriques() //
+        public void initialiserBriques()
         {
+            int posXlastBrique = 0;
+            int posXcurrentBrique = 0;
+            int largeurBrique = briques[0].getRectangle().Width;
+
             for( int i=0 ; i<briques.Count ; i++ )
             {
-                briques[i].Initialize(50 + ((i*64)), 50, 64, 32);
+                if (i != 0) posXlastBrique = briques[i - 1].getRectangle().X;
+                posXcurrentBrique = posXlastBrique + distanceEntreBriques + briques[0].getRectangle().Width;
+                briques[i].Initialize(posXcurrentBrique, 50, 64, 32);
             }
         }
 
