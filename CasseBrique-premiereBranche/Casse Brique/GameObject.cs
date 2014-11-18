@@ -27,6 +27,7 @@ namespace Casse_Brique
         }
 
         public Rectangle getRectangle() { return _rectangle; }
+        public Texture2D getTexture() { return _texture; }
 
         public GameObject(Game1 game, int vitesse, int dirX, int dirY)
         {
