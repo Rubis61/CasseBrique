@@ -86,7 +86,7 @@ namespace Casse_Brique
                     {
                         if (collideWithBrique.Y < milieuBalle.Y) // Collision bord droit
                         {
-                            _dirX = 1; // projection vers la droite
+                            _dirX = 1; // projection vers la droite//
                         }
                         else if (collideWithBrique.X < milieuBalle.X) // Collision bord bas
                         {
