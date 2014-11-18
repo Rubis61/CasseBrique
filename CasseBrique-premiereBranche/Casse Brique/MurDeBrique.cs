@@ -41,8 +41,8 @@ namespace Casse_Brique
         {
             int posXlastBrique = 0;
             int posXcurrentBrique = rectConteneur.X;
-            int largeurBrique = 256;//briques[0].getRectangle().Width;
-            int hauteurBrique = 128;//briques[0].getRectangle().Height;
+            int largeurBrique = 64;//briques[0].getRectangle().Width;
+            int hauteurBrique = 32;//briques[0].getRectangle().Height;
             int nbrMaxBriquesParLignes = rectConteneur.Width / (largeurBrique + distanceEntreBriques);
 
             int posY = rectConteneur.Y;
@@ -50,13 +50,16 @@ namespace Casse_Brique
             for( int i=0 ; i<briques.Count ; i++ )
             {
                 if (i != 0) posXlastBrique = briques[i - 1].getRectangle().X; // position de la dernière brique
+                
+                posXcurrentBrique = posXlastBrique + ((i!=0)?distanceEntreBriques:0) + briques[0].getRectangle().Width; // Calcul de la position de la brique actuelle grace à la prédédente
+               
                 if (i == nbrMaxBriquesParLignes) // cas maximum de brique dans une ligne atteint = saut d'une ligne avec espace entre
                 { 
                     ligne++;
                     posY += hauteurBrique + distanceEntreBriques; // calcul prochaine position en Y
+                    posXcurrentBrique = rectConteneur.X; // Retour à gauche
                 }
 
-                posXcurrentBrique = posXlastBrique + distanceEntreBriques + briques[0].getRectangle().Width; // Calcul de la position de la brique actuelle grace à la prédédente
                 briques[i].Initialize(posXcurrentBrique, posY, 64, 32);
             }
         }

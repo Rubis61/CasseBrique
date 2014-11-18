@@ -36,9 +36,9 @@ namespace Casse_Brique
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
-            Content.RootDirectory = "Content";
         }
 
         /// <summary>
