@@ -31,7 +31,7 @@ namespace Casse_Brique
             }
         }
 
-        public void initialiserBriques() //
+        public void initialiserBriques() 
         {
             for( int i=0 ; i<briques.Count ; i++ )
             {
