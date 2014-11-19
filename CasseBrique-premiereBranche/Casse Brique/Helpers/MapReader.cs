@@ -10,7 +10,7 @@ namespace Casse_Brique
     {
         
         private static string line;
-        public static string[] tabLine = new string[1];
+        public static string[] tabLine = new string[15];
         private static string[][] split = new string[15][];
         private static string directory = Directory.GetCurrentDirectory();
         private static int y = 0;
@@ -31,7 +31,7 @@ namespace Casse_Brique
 
     private static void SplitLigne()
     {
-        for (int i = 0; i < tabLine.Length; i++)
+        for (int i = 0; i < tabLine.Length && tabLine[i] != null; i++)
         {
             split[i] = tabLine[i].Split(' ');
         }
