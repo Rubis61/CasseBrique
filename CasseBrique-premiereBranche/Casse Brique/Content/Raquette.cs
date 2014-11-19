@@ -16,6 +16,7 @@ namespace Casse_Brique
         public Raquette(Game1 game, int vitesse, int dirX, int dirY)
             : base(game, vitesse, dirX, dirY)
         {
+            
         }
 
         public override void Update(GameTime gametime, KeyboardState keyboardState)
@@ -38,6 +39,11 @@ namespace Casse_Brique
             }
 
             base.Update(gametime, keyboardState);
+        }
+
+        public override void LoadContent(ContentManager content, string nom)
+        {
+            _texture = game.Content.Load<Texture2D>("barre");
         }
     }
 }

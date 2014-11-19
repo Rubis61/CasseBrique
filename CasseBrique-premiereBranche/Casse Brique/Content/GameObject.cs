@@ -42,7 +42,7 @@ namespace Casse_Brique
             _rectangle = new Rectangle(posX, posY, width, height);
         }
 
-        public void LoadContent(ContentManager content, string nom)
+        public virtual void LoadContent(ContentManager content, string nom)
         {
             if( _texture != null ) _texture = content.Load<Texture2D>(nom);
         }

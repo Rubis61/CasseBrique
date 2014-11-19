@@ -110,5 +110,10 @@ namespace Casse_Brique
 
             base.Update(gametime, keyboardState);
         }
+
+        public override void LoadContent(ContentManager content, string nom)
+        {
+            _texture = game.Content.Load<Texture2D>("balle");
+        }
     }
 }
