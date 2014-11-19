@@ -55,7 +55,7 @@ namespace Casse_Brique
             if (!collideWithBrique.IsEmpty) // Collision entre la balle et une brique OK
             {
                 Vector2 milieuBalle = new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2);
-
+                
                 if (_dirX == 1) // Direction de la balle vers la droite
                 {
                     if (_dirY == -1) // La balle monte
