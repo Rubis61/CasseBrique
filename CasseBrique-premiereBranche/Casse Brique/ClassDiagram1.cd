@@ -3,8 +3,8 @@
   <Class Name="Casse_Brique.Brique">
     <Position X="0.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Brique.cs</FileName>
+      <HashCode>AAAAAEAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Briques\Brique.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Casse_Brique.Balle">
@@ -52,7 +52,7 @@
   <Class Name="Casse_Brique.MapReader">
     <Position X="10.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAEAAAAQAAACAAAAAIAAAAAABBAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>gAEAAAAQAAAQAAAAAIAAAAAABBAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>MapReader.cs</FileName>
     </TypeIdentifier>
   </Class>

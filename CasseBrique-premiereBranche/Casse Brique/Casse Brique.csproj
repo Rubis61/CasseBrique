@@ -36,9 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Balle.cs" />
-    <Compile Include="Brique.cs" />
-    <Compile Include="BriqueNormale.cs" />
-    <Compile Include="BriqueBonus.cs" />
+    <Compile Include="Briques\Brique.cs" />
+    <Compile Include="Briques\BriqueNormale.cs" />
+    <Compile Include="Briques\BriqueBonus.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="MapReader.cs" />
@@ -58,7 +58,6 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Briques\" />
     <Folder Include="Content\" />
     <Folder Include="Helpers\" />
     <Folder Include="Utilitaires\" />
