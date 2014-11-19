@@ -81,6 +81,7 @@ namespace Casse_Brique
 
                     ligneBriques[ligne][colonne].Initialize(posXcurrentBrique, posY, 64, 32);
                 }
+                posXcurrentBrique = rectConteneur.X;
                 posY += hauteurBrique + distanceEntreBriques; // calcul prochaine position en Y
             }
         }
@@ -93,11 +94,13 @@ namespace Casse_Brique
             {
                 Brique[] tmpLigneBriques = new Brique[20];
 
-                tmpLigneBriques = créerBriques(tmpLigneBriques);
+                if (map[ligne] == null) tmpLigneBriques = créerBriquesVides(tmpLigneBriques);
+                else tmpLigneBriques = créerBriques(tmpLigneBriques);
+               // tmpLigneBriques = null;
                 
                 for( int colonne=0 ; map[ligne]!=null && colonne<map[ligne].Length ; colonne++ )
                 {
-                    if (map[ligne][colonne] == null) map[ligne][colonne] = "*"; //
+                    if (map[ligne][colonne] == null) map[ligne][colonne] = "*"; // brique inconnue donc brique vide
 
                     Brique tmpBrique;
                     char[] tmpCharArray = map[ligne][colonne].ToCharArray();
@@ -106,8 +109,20 @@ namespace Casse_Brique
                     tmpLigneBriques[colonne] = tmpBrique;
                 }
 
+                //if( tmpLigneBriques == null ) tmpLigneBriques = créerBriquesVides(tmpLigneBriques);
+
                 ligneBriques.Add(tmpLigneBriques);
             }
+        }
+
+        private Brique[] créerBriquesVides(Brique[] briques)
+        {
+            for (int i = 0; i < briques.Length; i++)
+            {
+                briques[i] = new BriqueVide(game, 0, 0, 0);
+            }
+
+            return briques;
         }
 
         private Brique[] créerBriques(Brique[] briques)
@@ -142,7 +157,7 @@ namespace Casse_Brique
                     brique = new BriqueNormale(game, 0, 0, 0);
                     break;
                 default:
-                    brique = null;
+                    brique = new BriqueVide(game, 0, 0, 0);
                     break;
             }
         }
@@ -183,7 +198,8 @@ namespace Casse_Brique
                     {
                         brique = ligneBrique[i];
                         //briques[i].unLoadContent();
-                        ligneBrique[i].isActive = false;
+                        //ligneBrique[i].isActive = false;
+                        ligneBrique[i] = new BriqueVide(game, 0, 0, 0);
 
                         return rectangleCollider;
                     }

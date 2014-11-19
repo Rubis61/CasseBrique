@@ -59,7 +59,7 @@ namespace Casse_Brique
             _rectangle.Y += vitesse * _dirY;
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime gametime)
+        public virtual void Draw(SpriteBatch spriteBatch, GameTime gametime)
         {
             spriteBatch.Draw(_texture, _rectangle, Color.White);
         }
