@@ -149,35 +149,47 @@ namespace Casse_Brique
 
         public void loadContentBriques(ContentManager content)
         {
-            foreach (var brique in briques)
+            foreach (var ligneBrique in ligneBriques)
             {
-                brique.LoadContent(content, "brick016");
+                foreach (var brique in ligneBrique)
+                {
+                    brique.LoadContent(content, "brick016");
+                }
             }
         }
 
         public void drawBriques(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            foreach (var brique in briques)
+            foreach (var ligneBrique in ligneBriques)
             {
-                brique.Draw(spriteBatch, gameTime);
+                foreach (var brique in ligneBrique)
+                {
+                    brique.Draw(spriteBatch, gameTime);                    
+                }
             }
         }
 
         public Rectangle isCollisionWithBrique(Rectangle rectangle, out Brique brique)
         {
-            for (int i = 0; i < briques.Count; i++)
+            foreach (var ligneBrique in ligneBriques)
             {
-                Rectangle rectangleCollider = Rectangle.Intersect(briques[i].getRectangle(), rectangle);
-
-                if (!rectangleCollider.IsEmpty)
+                for (int i = 0; i < ligneBrique.Length; i++)
                 {
-                    brique = briques[i];
-                    //briques[i].unLoadContent();
-                    briques.RemoveAt(i);
+                    if (!ligneBrique[i].isActive) break;
 
-                    return rectangleCollider;
+                    Rectangle rectangleCollider = Rectangle.Intersect(ligneBrique[i].getRectangle(), rectangle);
+
+                    if (!rectangleCollider.IsEmpty)
+                    {
+                        brique = ligneBrique[i];
+                        //briques[i].unLoadContent();
+                        ligneBrique[i].isActive = false;
+
+                        return rectangleCollider;
+                    }
                 }
             }
+            
             brique = null;
             return Rectangle.Empty;
         }
