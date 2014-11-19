@@ -49,7 +49,8 @@ namespace Casse_Brique
             }
             else game.Log = "";
 
-            Rectangle collideWithBrique = game.murDeBrique.isCollisionWithBrique(_rectangle); // demande si il y a collision entre balle et une des briques du mur de brique ( rectangle null si aucune collision )
+            Brique brique;
+            Rectangle collideWithBrique = game.murDeBrique.isCollisionWithBrique(_rectangle, out brique); // demande si il y a collision entre balle et une des briques du mur de brique ( rectangle null si aucune collision )
 
             if (!collideWithBrique.IsEmpty) // Collision entre la balle et une brique OK
             {
@@ -63,7 +64,7 @@ namespace Casse_Brique
                         {
                             _dirX = -1; // projection vers la gauche
                         }
-                        else if (collideWithBrique.X < milieuBalle.X) // Collision bord bas
+                        else if (collideWithBrique.Y+collideWithBrique.Height == brique.getRectangle().Y+brique.getRectangle().Height) // Collision bord bas
                         {
                             _dirY = 1; // projection vers le bas
                         }
@@ -84,11 +85,11 @@ namespace Casse_Brique
                 {
                     if (_dirY == -1) // La balle monte
                     {
-                        if (collideWithBrique.Y < milieuBalle.Y) // Collision bord droit
+                        if (collideWithBrique.X + collideWithBrique.Width == brique.getRectangle().X + brique.getRectangle().Width) // Collision bord droit
                         {
-                            _dirX = 1; // projection vers la droite//
+                            _dirX = 1; // projection vers la droite
                         }
-                        else if (collideWithBrique.X < milieuBalle.X) // Collision bord bas
+                        if (collideWithBrique.Y + collideWithBrique.Height == brique.getRectangle().Y + brique.getRectangle().Height) // Collision bord bas
                         {
                             _dirY = 1; // projection vers le bas
                         }
@@ -105,23 +106,6 @@ namespace Casse_Brique
                         }
                     }
                 }
-                /*
-                if( milieuBalle.X < collideWithBrique.X ) // Collision 
-                {
-                    _dirX = -1;
-                }
-                else if( milieuBalle.X > collideWithBrique.X )
-                {
-                    _dirX = 1;
-                }
-                else if( milieuBalle.Y > collideWithBrique.Y )
-                {
-                    _dirY = 1;
-                }
-                else if( milieuBalle.Y < collideWithBrique.Y )
-                {
-                    _dirY = -1;
-                }*/
             }
 
             base.Update(gametime, keyboardState);

@@ -26,12 +26,12 @@ namespace Casse_Brique
             int largeurFenetre = game.getWidth();
             int hauteurFenetre = game.getHeight();
 
-            rectConteneur = new Rectangle(50, 50, largeurFenetre-50, hauteurFenetre*2/3);
+            rectConteneur = new Rectangle(50, 50, largeurFenetre - 50, hauteurFenetre * 2 / 3);
         }
 
         public void générerMurDeBriqueDeBase()
         {
-            for (int i = 0; i < 19; i++)
+            for (int i = 0; i < 100; i++)
             {
                 briques.Add(new Brique(game, 0, 0, 0));
             }
@@ -47,14 +47,17 @@ namespace Casse_Brique
 
             int posY = rectConteneur.Y;
             int ligne = 0;
-            for( int i=0 ; i<briques.Count ; i++ )
+            for (int i = 0; i < briques.Count; i++)
             {
-                if (i != 0) posXlastBrique = briques[i - 1].getRectangle().X; // position de la dernière brique
-                
-                posXcurrentBrique = posXlastBrique + ((i!=0)?distanceEntreBriques:0) + briques[0].getRectangle().Width; // Calcul de la position de la brique actuelle grace à la prédédente
-               
-                if (i == nbrMaxBriquesParLignes) // cas maximum de brique dans une ligne atteint = saut d'une ligne avec espace entre
-                { 
+                if (i != 0)
+                {
+                    posXlastBrique = briques[i - 1].getRectangle().X; // position de la brique précédente
+
+                    posXcurrentBrique = posXlastBrique + ((i != 0) ? distanceEntreBriques : 0) + briques[0].getRectangle().Width; // Calcul de la position de la brique actuelle grace à la prédédente
+                }
+
+                if (i%nbrMaxBriquesParLignes == 0) // cas maximum de brique dans une ligne atteint = saut d'une ligne avec espace entre
+                {
                     ligne++;
                     posY += hauteurBrique + distanceEntreBriques; // calcul prochaine position en Y
                     posXcurrentBrique = rectConteneur.X; // Retour à gauche
@@ -80,20 +83,22 @@ namespace Casse_Brique
             }
         }
 
-        public Rectangle isCollisionWithBrique(Rectangle rectangle)
+        public Rectangle isCollisionWithBrique(Rectangle rectangle, out Brique brique)
         {
-            for( int i=0 ; i<briques.Count ; i++ )
+            for (int i = 0; i < briques.Count; i++)
             {
                 Rectangle rectangleCollider = Rectangle.Intersect(briques[i].getRectangle(), rectangle);
 
-                if( !rectangleCollider.IsEmpty )
+                if (!rectangleCollider.IsEmpty)
                 {
+                    brique = briques[i];
                     //briques[i].unLoadContent();
                     briques.RemoveAt(i);
 
                     return rectangleCollider;
                 }
             }
+            brique = null;
             return Rectangle.Empty;
         }
     }
