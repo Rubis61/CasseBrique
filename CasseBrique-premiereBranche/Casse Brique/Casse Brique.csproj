@@ -35,17 +35,17 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Balle.cs" />
+    <Compile Include="Content\Balle.cs" />
     <Compile Include="Briques\Brique.cs" />
     <Compile Include="Briques\BriqueNormale.cs" />
     <Compile Include="Briques\BriqueBonus.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="GameObject.cs" />
-    <Compile Include="MapReader.cs" />
-    <Compile Include="MurDeBrique.cs" />
+    <Compile Include="Content\GameObject.cs" />
+    <Compile Include="Helpers\MapReader.cs" />
+    <Compile Include="Content\MurDeBrique.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Raquette.cs" />
+    <Compile Include="Content\Raquette.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -58,8 +58,6 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Utilitaires\" />
   </ItemGroup>
   <ItemGroup>

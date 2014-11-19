@@ -11,7 +11,7 @@
     <Position X="2.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Balle.cs</FileName>
+      <FileName>Content\Balle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Casse_Brique.Game1">
@@ -25,14 +25,14 @@
     <Position X="2.25" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAQAIAAAAQAAAyAAAAAAAAAAAAQAAAQYAAAAAAEAAAQ=</HashCode>
-      <FileName>GameObject.cs</FileName>
+      <FileName>Content\GameObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Casse_Brique.MurDeBrique">
     <Position X="8.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAACAgAiAACAAIAAAAIAgAAIA=</HashCode>
-      <FileName>MurDeBrique.cs</FileName>
+      <FileName>Content\MurDeBrique.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Casse_Brique.Program" Collapsed="true">
@@ -46,14 +46,14 @@
     <Position X="4.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Raquette.cs</FileName>
+      <FileName>Content\Raquette.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Casse_Brique.MapReader">
     <Position X="10.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAEAAAAQAAAQAAAAAIAAAAAABBAAAAAAAAAgAAAAAAA=</HashCode>
-      <FileName>MapReader.cs</FileName>
+      <FileName>Helpers\MapReader.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
