@@ -44,7 +44,7 @@ namespace Casse_Brique
 
         public void LoadContent(ContentManager content, string nom)
         {
-            _texture = content.Load<Texture2D>(nom);
+            if( _texture != null ) _texture = content.Load<Texture2D>(nom);
         }
 
         public void unLoadContent()

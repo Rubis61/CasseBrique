@@ -56,5 +56,19 @@
       <FileName>Helpers\MapReader.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Casse_Brique.BriqueBonus">
+    <Position X="0.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Briques\BriqueBonus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Casse_Brique.BriqueNormale" Collapsed="true">
+    <Position X="2.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Briques\BriqueNormale.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
