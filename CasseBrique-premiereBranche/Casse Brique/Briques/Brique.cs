@@ -15,12 +15,14 @@ namespace Casse_Brique
     {
         public bool IsInfinite { get; set; }
         public int Vie { get; set; }
+        //public bool isActive { get; set; }
         //public Bonus Bonus { get; set; }
 
-        public Brique(Game1 game, int vitesse, int dirX, int dirY) 
+        public Brique(Game1 game, int vitesse, int dirX, int dirY)
             : base(game, vitesse, dirX, dirY)
         {
-            
+            IsInfinite = false;
+            Vie = 1;
         }
 
         public override void LoadContent(ContentManager content, string nom)

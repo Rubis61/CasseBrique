@@ -15,13 +15,15 @@ namespace Casse_Brique
     {
         public Rectangle rectConteneur { get; set; }
         public List<Brique> briques { get; set; }
+        public List<Brique[]> ligneBriques { get; set; }
         private const int distanceEntreBriques = 0;//15;
         private Game1 game;
 
         public MurDeBrique(Game1 game)
         {
             this.game = game;
-            briques = new List<Brique>();
+            //briques = new List<Brique>();
+            ligneBriques = new List<Brique[]>();
 
             int largeurFenetre = game.getWidth();
             int hauteurFenetre = game.getHeight();
@@ -46,6 +48,7 @@ namespace Casse_Brique
             int nbrMaxBriquesParLignes = rectConteneur.Width / (largeurBrique + distanceEntreBriques);
 
             int posY = rectConteneur.Y;
+            /*
             int ligne = 0;
             for (int i = 0; i < briques.Count; i++)
             {
@@ -64,12 +67,68 @@ namespace Casse_Brique
                 }
 
                 briques[i].Initialize(posXcurrentBrique, posY, 64, 32);
+            }*/
+            for (int ligne = 0; ligne < ligneBriques.Count; ligne++)
+            {
+                for (int colonne = 0; colonne < 20; colonne++)
+                {
+                    if (colonne != 0)
+                    {
+                        posXlastBrique = ligneBriques[ligne][colonne - 1].getRectangle().X; // position de la brique précédente
+
+                        posXcurrentBrique = posXlastBrique + ((colonne != 0) ? distanceEntreBriques : 0) + ligneBriques[ligne][0].getRectangle().Width; // Calcul de la position de la brique actuelle grace à la prédédente
+                    }
+
+                    ligneBriques[ligne][colonne].Initialize(posXcurrentBrique, posY, 64, 32);
+                }
+                posY += hauteurBrique + distanceEntreBriques; // calcul prochaine position en Y
             }
         }
 
-        public void chargerBriques()
+        public void chargerBriques(int level)
         {
+            string[][] map = MapReader.getMap(level);
 
+            for( int ligne=0 ; ligne<map.Length ; ligne++ )
+            {
+                Brique[] tmpLigneBriques = new Brique[20];
+
+                tmpLigneBriques = créerBriques(tmpLigneBriques);
+                
+                for( int colonne=0 ; map[ligne]!=null && colonne<map[ligne].Length ; colonne++ )
+                {
+                    if (map[ligne][colonne] == null) map[ligne][colonne] = "*"; //
+
+                    Brique tmpBrique;
+                    char[] tmpCharArray = map[ligne][colonne].ToCharArray();
+                    char id = tmpCharArray[0];
+                    convertirBrique(out tmpBrique, id);
+                    tmpLigneBriques[colonne] = tmpBrique;
+                }
+
+                ligneBriques.Add(tmpLigneBriques);
+            }
+        }
+
+        private Brique[] créerBriques(Brique[] briques)
+        {
+            for( int i=0 ; i<briques.Length ; i++ )
+            {
+                briques[i] = new Brique(game, 0, 0, 0);
+            }
+
+            return briques;
+        }
+
+        private void enleverNullMap(string[][] map)
+        {
+            for (int ligne = 0; ligne < map.Length; ligne++)
+            {
+                for (int colonne = 0; colonne < map[ligne].Length; colonne++)
+                {
+                    
+                }
+            }
         }
 
         private void convertirBrique(out Brique brique, char id)

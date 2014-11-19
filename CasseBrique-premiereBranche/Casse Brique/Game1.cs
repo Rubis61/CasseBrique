@@ -59,7 +59,8 @@ namespace Casse_Brique
             
             Log = "";
 
-            murDeBrique.générerMurDeBriqueDeBase();
+            //murDeBrique.générerMurDeBriqueDeBase();
+            murDeBrique.chargerBriques(1);
             murDeBrique.initialiserBriques();
 
             MapReader.getMap(1);
