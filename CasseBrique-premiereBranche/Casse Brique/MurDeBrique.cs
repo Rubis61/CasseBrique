@@ -15,7 +15,7 @@ namespace Casse_Brique
     {
         public Rectangle rectConteneur { get; set; }
         public List<Brique> briques { get; set; }
-        private const int distanceEntreBriques = 15;
+        private const int distanceEntreBriques = 0;//15;
         private Game1 game;
 
         public MurDeBrique(Game1 game)
@@ -26,12 +26,12 @@ namespace Casse_Brique
             int largeurFenetre = game.getWidth();
             int hauteurFenetre = game.getHeight();
 
-            rectConteneur = new Rectangle(50, 50, largeurFenetre - 50, hauteurFenetre * 2 / 3);
+            rectConteneur = new Rectangle(0, 0, largeurFenetre, hauteurFenetre * 2 / 3);
         }
 
         public void générerMurDeBriqueDeBase()
         {
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 300; i++)
             {
                 briques.Add(new Brique(game, 0, 0, 0));
             }
@@ -56,7 +56,7 @@ namespace Casse_Brique
                     posXcurrentBrique = posXlastBrique + ((i != 0) ? distanceEntreBriques : 0) + briques[0].getRectangle().Width; // Calcul de la position de la brique actuelle grace à la prédédente
                 }
 
-                if (i%nbrMaxBriquesParLignes == 0) // cas maximum de brique dans une ligne atteint = saut d'une ligne avec espace entre
+                if (i%nbrMaxBriquesParLignes == 0 && i!=0) // cas maximum de brique dans une ligne atteint = saut d'une ligne avec espace entre
                 {
                     ligne++;
                     posY += hauteurBrique + distanceEntreBriques; // calcul prochaine position en Y
