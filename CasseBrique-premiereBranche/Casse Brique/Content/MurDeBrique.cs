@@ -67,6 +67,27 @@ namespace Casse_Brique
             }
         }
 
+        public void chargerBriques()
+        {
+
+        }
+
+        private void convertirBrique(out Brique brique, char id)
+        {
+            switch (id)
+            {
+                case '0':
+                    brique = null;
+                    break;
+                case '1':
+                    brique = new BriqueNormale(game, 0, 0, 0);
+                    break;
+                default:
+                    brique = null;
+                    break;
+            }
+        }
+
         public void loadContentBriques(ContentManager content)
         {
             foreach (var brique in briques)
