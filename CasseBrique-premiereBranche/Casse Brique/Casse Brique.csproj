@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Balle.cs" />
     <Compile Include="Brique.cs" />
+    <Compile Include="BriqueNormale.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="MapReader.cs" />

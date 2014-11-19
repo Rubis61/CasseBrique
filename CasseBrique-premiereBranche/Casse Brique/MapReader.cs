@@ -12,13 +12,13 @@ namespace Casse_Brique
         private static string line;
         public static string[] tabLine = new string[1];
         private static string[][] split = new string[15][];
-        private static string repository = Directory.GetCurrentDirectory();
+        private static string directory = Directory.GetCurrentDirectory();
         private static int y = 0;
 
-    private static void readLigneFichier()
+    private static void readLigneFichier(int level)
     {
 
-    System.IO.StreamReader file = new System.IO.StreamReader(@repository+"\\level\\level1.txt");
+    System.IO.StreamReader file = new System.IO.StreamReader(directory+"\\level\\level" + level +".txt");
 
     while((line = file.ReadLine()) != null)
     {
@@ -38,8 +38,10 @@ namespace Casse_Brique
 
     }
         
-    public static string[][] getMap()
+    public static string[][] getMap(int level)
     {
+        readLigneFichier(level);
+        SplitLigne();
         return split;
     }
 
