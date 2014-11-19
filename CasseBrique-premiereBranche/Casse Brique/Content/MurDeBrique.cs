@@ -95,8 +95,8 @@ namespace Casse_Brique
                 Brique[] tmpLigneBriques = new Brique[20];
 
                 if (map[ligne] == null) tmpLigneBriques = créerBriquesVides(tmpLigneBriques);
-                else tmpLigneBriques = créerBriques(tmpLigneBriques);
-               // tmpLigneBriques = null;
+                else tmpLigneBriques = créerBriquesVides(tmpLigneBriques);
+                // tmpLigneBriques = null;
                 
                 for( int colonne=0 ; map[ligne]!=null && colonne<map[ligne].Length ; colonne++ )
                 {
@@ -179,29 +179,30 @@ namespace Casse_Brique
             {
                 foreach (var brique in ligneBrique)
                 {
-                    brique.Draw(spriteBatch, gameTime);                    
+                    if( brique.isActive ) brique.Draw(spriteBatch, gameTime);
                 }
             }
         }
 
         public Rectangle isCollisionWithBrique(Rectangle rectangle, out Brique brique)
         {
-            foreach (var ligneBrique in ligneBriques)
+            for (int ligne = 0; ligne < ligneBriques.Count; ligne++)
             {
-                for (int i = 0; i < ligneBrique.Length; i++)
+                for (int colonne = 0; colonne < ligneBriques[ligne].Length; colonne++)
                 {
-                    if (!ligneBrique[i].isActive) break;
-
-                    Rectangle rectangleCollider = Rectangle.Intersect(ligneBrique[i].getRectangle(), rectangle);
-
-                    if (!rectangleCollider.IsEmpty)
+                    if (ligneBriques[ligne][colonne].isActive) // La brique est active
                     {
-                        brique = ligneBrique[i];
-                        //briques[i].unLoadContent();
-                        //ligneBrique[i].isActive = false;
-                        ligneBrique[i] = new BriqueVide(game, 0, 0, 0);
+                        Rectangle rectangleCollider = Rectangle.Intersect(ligneBriques[ligne][colonne].getRectangle(), rectangle);
 
-                        return rectangleCollider;
+                        if (!rectangleCollider.IsEmpty) // rectangle non null donc collision détectée
+                        {
+                            brique = ligneBriques[ligne][colonne];
+                            //ligneBriques[ligne][colonne].unLoadContent();
+                            //ligneBriques[ligne][colonne].isActive = false;
+                            ligneBriques[ligne][colonne] = new BriqueVide(game, 0, 0, 0);
+
+                            return rectangleCollider;
+                        }
                     }
                 }
             }

@@ -11,15 +11,15 @@ using Microsoft.Xna.Framework.GamerServices;
 
 namespace Casse_Brique
 {
-    class BriqueNormale :  Brique
+    class BriqueNormale : Brique
     {
-
         public BriqueNormale(Game1 game, int vitesse, int dirX, int dirY)
             : base(game, vitesse, dirX, dirY)
         {
             IsInfinite = false;
             Vie = 1;
-            _texture = game.Content.Load<Texture2D>("brick016");
+            isActive = true;
+            //_texture = game.Content.Load<Texture2D>("brick016");
         }
     }
 }
