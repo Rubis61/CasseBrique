@@ -62,6 +62,7 @@ namespace Casse_Brique
             murDeBrique.générerMurDeBriqueDeBase();
             murDeBrique.initialiserBriques();
 
+            MapReader.getMap(1);
             base.Initialize();
         }
         
