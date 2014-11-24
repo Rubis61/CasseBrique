@@ -1,0 +1,4 @@
+TO DO : 
+	- Charger la map
+	- Trouver texture des briques bonus etc...
+	- Coder toutes les collisions
