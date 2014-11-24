@@ -89,7 +89,7 @@ namespace Casse_Brique
                         {
                             _dirX = 1; // projection vers la droite
                         }
-                        if (collideWithBrique.Y + collideWithBrique.Height == brique.getRectangle().Y + brique.getRectangle().Height) // Collision bord bas
+                        else if (collideWithBrique.Y + collideWithBrique.Height == brique.getRectangle().Y + brique.getRectangle().Height) // Collision bord bas
                         {
                             _dirY = 1; // projection vers le bas
                         }
@@ -100,7 +100,7 @@ namespace Casse_Brique
                         {
                             _dirY = -1; // projection vers le haut
                         }
-                        else if (collideWithBrique.Y < milieuBalle.Y) // Collision bord droit
+                        else if (collideWithBrique.X + collideWithBrique.Width == brique.getRectangle().X + brique.getRectangle().Width)//collideWithBrique.Y < milieuBalle.Y) // Collision bord droit
                         {
                             _dirX = 1; // projection vers la droite
                         }
