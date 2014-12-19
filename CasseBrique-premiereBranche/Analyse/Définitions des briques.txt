@@ -1,0 +1,5 @@
+Briques : infinie = false, vie = 1
+	BriqueNormale infinie = false, vie = 1
+	BriqueBonus infinie = false, vie = 1, bonus = bonus
+	BriqueDoubleCoup : vie = 2
+	BriqueIncassable : infinie = true

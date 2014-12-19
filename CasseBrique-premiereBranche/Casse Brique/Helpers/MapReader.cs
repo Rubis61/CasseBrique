@@ -17,18 +17,15 @@ namespace Casse_Brique
 
     private static void readLigneFichier(int level)
     {
+        System.IO.StreamReader file = new System.IO.StreamReader(directory+"\\level\\level" + level +".txt");
 
-    System.IO.StreamReader file = new System.IO.StreamReader(directory+"\\level\\level" + level +".txt");
+        while((line = file.ReadLine()) != null)
+        {
+            tabLine[y] = line;
+            y++;
 
-    while((line = file.ReadLine()) != null)
-    {
-        if (y > 14)
-        { break; }
-        tabLine[y] = line;
-        y++;
-
-    }
-    file.Close();
+        }
+        file.Close();
     }
 
     private static void SplitLigne()
@@ -37,7 +34,6 @@ namespace Casse_Brique
         {
             split[i] = tabLine[i].Split(' ');
         }
-
     }
         
     public static string[][] getMap(int level)

@@ -28,7 +28,7 @@ namespace Casse_Brique
 
         public override void LoadContent(ContentManager content, string nom)
         {
-            _texture = game.Content.Load<Texture2D>("brick016");            
+            _texture = game.Content.Load<Texture2D>("brick016");
         }
     }
 }

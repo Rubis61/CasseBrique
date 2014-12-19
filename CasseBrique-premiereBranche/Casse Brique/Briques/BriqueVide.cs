@@ -22,6 +22,11 @@ namespace Casse_Brique
             _texture = null;
         }
 
+        public override void LoadContent(ContentManager content, string nom)
+        {
+            
+        }
+
         public override void Draw(SpriteBatch spriteBatch, GameTime gametime)
         {
             

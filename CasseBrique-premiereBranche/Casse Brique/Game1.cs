@@ -53,7 +53,7 @@ namespace Casse_Brique
             // TODO: Add your initialization logic here
             Raquette = new Raquette(this, 10, 0, 0);
             Raquette.Initialize((width/2)-(135/2)-3, height * 19 / 20, 130, 28);
-            balle = new Balle(this, 5, 1, 1);
+            balle = new Balle(this, 10, 1, 1);
             balle.Initialize(width/2,height/2,25,25);
             murDeBrique = new MurDeBrique(this);
             
@@ -63,7 +63,6 @@ namespace Casse_Brique
             murDeBrique.chargerBriques(1);
             murDeBrique.initialiserBriques();
 
-          //  MapReader.getMap(1);
             base.Initialize();
         }
 
@@ -127,9 +126,9 @@ namespace Casse_Brique
             spriteBatch.Begin();
                 Raquette.Draw(spriteBatch, gameTime);
                 balle.Draw(spriteBatch, gameTime);
-                spriteBatch.DrawString(font_position, Raquette.getPosition(), new Vector2(10, 10), Color.Red);
-                spriteBatch.DrawString(font_log, Log, new Vector2(400, 10), Color.Blue);
                 murDeBrique.drawBriques(spriteBatch, gameTime);
+                spriteBatch.DrawString(font_position, murDeBrique.ligneBriques[0][0].GetType().ToString(), new Vector2(10, 10), Color.Red);
+                spriteBatch.DrawString(font_log, Log, new Vector2(400, 10), Color.Blue);
             spriteBatch.End();
 
             base.Draw(gameTime);
