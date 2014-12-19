@@ -18,6 +18,7 @@ namespace Casse_Brique
             : base(game, vitesse, dirX, dirY)
         {
             IsInfinite = false;
+            isActive = true;
             Vie = 1;
             _texture = game.Content.Load<Texture2D>("brick016");
         }
