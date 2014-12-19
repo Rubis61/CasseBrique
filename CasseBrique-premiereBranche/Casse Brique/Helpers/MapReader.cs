@@ -22,6 +22,8 @@ namespace Casse_Brique
 
     while((line = file.ReadLine()) != null)
     {
+        if (y > 14)
+        { break; }
         tabLine[y] = line;
         y++;
 
