@@ -12,14 +12,20 @@ namespace Casse_Brique
     /// </summary>
     public static class Program
     {
+        public static bool restart = true;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
-                game.Run();
+            while (restart)
+            {
+                restart = false;
+                using (var game = new Game1())
+                    game.Run();
+            }
         }
     }
 #endif

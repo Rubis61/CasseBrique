@@ -13,10 +13,13 @@ namespace Casse_Brique
 {
     public class Balle : GameObject
     {
+        private float Boost = 1;
+        private Vector2 normal;
+
         public Balle(Game1 game, int vitesse, float dirX, float dirY)
             : base(game, vitesse, dirX, dirY)
         {
-
+            Boost = 1;
         }
 
         public override void Update(GameTime gametime, KeyboardState keyboardState)
@@ -29,9 +32,17 @@ namespace Casse_Brique
             collideWithBriques();
 
             //Direction.X *= Math.Abs(collideWithRaquette());
-            Direction.X = Direction.X * Math.Abs(collideWithRaquette());
+            collideWithRaquette();
+            Boost = Math.Abs(Boost);
 
-            Direction.X = (Direction.X > 2) ? 2 : (Direction.X < -2) ? -2 : Direction.X;
+            //Direction.X = Direction.X * Boost;
+            //Direction.Y = Direction.Y * Boost;
+
+            //Direction.X = (Direction.X > 2) ? 2 : (Direction.X < -2) ? -2 : Direction.X;
+            //Direction.Y = (Direction.Y > 2) ? 2 : (Direction.Y < -2) ? -2 : Direction.Y;
+
+            _rectangle.X += (int)normal.X;
+            _rectangle.Y += (int)normal.Y;
 
             base.Update(gametime, keyboardState);
         }
@@ -59,7 +70,7 @@ namespace Casse_Brique
 
         private float collideWithRaquette()
         {
-            float boost = 1;
+            //float boost = 1;
             if (game.Raquette.getRectangle().Intersects(_rectangle)) // Détection collision entre la balle et la raquete
             {
                 game.Log = "Intersection !!";
@@ -67,23 +78,40 @@ namespace Casse_Brique
                 Raquette raquette = game.Raquette;
                 Rectangle posRaquette = raquette.getRectangle();
                 Texture2D textureRaquette = raquette.getTexture();
-
+                /*
                 int milieuRaquette_X = (posRaquette.X + textureRaquette.Width) / 2;
-                int distanceEntrePostionDuBoostEtLeMilieuDeLaRaquette_X = textureRaquette.Width * 1 / 4;
+                int distanceEntrePostionDuBoostEtLeMilieuDeLaRaquette_X = textureRaquette.Width * 1 / 3;
                 bool boostGauche = _rectangle.X <= (milieuRaquette_X - distanceEntrePostionDuBoostEtLeMilieuDeLaRaquette_X);
-                bool boostDroit = _rectangle.X >= (milieuRaquette_X + distanceEntrePostionDuBoostEtLeMilieuDeLaRaquette_X);
+                bool boostDroit = _rectangle.X >= (textureRaquette.Width - distanceEntrePostionDuBoostEtLeMilieuDeLaRaquette_X);
+                */
 
-                if(boostGauche)
+                float distanceDroiteGauche = raquette.getRectangle().Width;
+                float positionXballe = _rectangle.X - ( raquette.getRectangle().X - raquette.getRectangle().Width/2 );
+                float pourcentage = positionXballe / distanceDroiteGauche;
+
+                if(pourcentage < 0.33f)
                 {
-                    boost = (Direction.X<0)? -2 : -1;
+                    normal = new Vector2(-0.196f, -0.981f);
                 }
-                else if(boostDroit) boost = (Direction.X > 0) ? 2 : 1;
-
+                else if (pourcentage > 0.66f)
+                {
+                    normal = new Vector2(0.196f, -0.981f);
+                }
+                /*
+                if (boostGauche)
+                {
+                    Boost = (Direction.X < 0) ? -2f : -1;
+                }
+                else if (boostDroit) 
+                    Boost = (Direction.X > 0) ? 2f : 1;
+                else 
+                    Boost = 1;
+                */
                 Direction.Y *= -1;
             }
             else game.Log = "";
 
-            return boost;
+            return Boost;
         }
 
         private void collideWithBriques()

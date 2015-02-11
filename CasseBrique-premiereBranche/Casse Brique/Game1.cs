@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 #endregion
 
+// https://trello.com/b/BrEGQ4Y8/candy-casse-brique
+
 namespace Casse_Brique
 {
     /// <summary>
@@ -16,13 +18,19 @@ namespace Casse_Brique
     /// </summary>
     public class Game1 : Game
     {
+        private static int ESPACE_BALLE_RAQUETTE_INIT = 40;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        private bool isPaused = true;
 
         const int height = 720;
         const int width = 1280;
         public int getHeight() { return height; }
         public int getWidth() { return width; }
+
+        private KeyboardState lastKeyboardState;
 
         public Raquette Raquette { get; private set; }
         Balle balle;
@@ -53,8 +61,8 @@ namespace Casse_Brique
             // TODO: Add your initialization logic here
             Raquette = new Raquette(this, 10, 0, 0);
             Raquette.Initialize((width/2)-(135/2)-3, height * 19 / 20, 130, 28);
-            balle = new Balle(this, 5, 1, 1);
-            balle.Initialize(width/2,height/2,25,25);
+            balle = new Balle(this, 4, 1, -1);
+            balle.Initialize(width/2 - 24/2, Raquette.getRectangle().Y - ESPACE_BALLE_RAQUETTE_INIT,25,25);
             murDeBrique = new MurDeBrique(this);
             
             Log = "";
@@ -105,9 +113,21 @@ namespace Casse_Brique
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-            Raquette.Update(gameTime, keyboardState);
-            balle.Update(gameTime, keyboardState);
+            if (keyboardState.IsKeyDown(Keys.P) && !lastKeyboardState.IsKeyDown(Keys.P)) isPaused = !isPaused;
+
+            if (!isPaused)
+            {
+                // TODO: Add your update logic here
+                Raquette.Update(gameTime, keyboardState);
+                balle.Update(gameTime, keyboardState);
+            }
+
+            if (keyboardState.IsKeyDown(Keys.R))
+            {
+                Initialize();
+            }
+
+            lastKeyboardState = keyboardState;
 
             base.Update(gameTime);
         }
