@@ -1,0 +1,10 @@
+Types briques : 
+	- Invincible (caramel) (0)
+	- Base : 
+		- Bueno   (1)
+		- Mars    (2)
+		- Malabar (3)
+	- Double	(4)
+	- Triple	(5)
+	- Invisible	(6)
+	- Mouvante	(7)

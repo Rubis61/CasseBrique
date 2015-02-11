@@ -53,7 +53,7 @@ namespace Casse_Brique
             // TODO: Add your initialization logic here
             Raquette = new Raquette(this, 10, 0, 0);
             Raquette.Initialize((width/2)-(135/2)-3, height * 19 / 20, 130, 28);
-            balle = new Balle(this, 10, 1, 1);
+            balle = new Balle(this, 5, 1, 1);
             balle.Initialize(width/2,height/2,25,25);
             murDeBrique = new MurDeBrique(this);
             
@@ -65,8 +65,6 @@ namespace Casse_Brique
 
             base.Initialize();
         }
-
-        
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -127,7 +125,8 @@ namespace Casse_Brique
                 Raquette.Draw(spriteBatch, gameTime);
                 balle.Draw(spriteBatch, gameTime);
                 murDeBrique.drawBriques(spriteBatch, gameTime);
-                spriteBatch.DrawString(font_position, murDeBrique.ligneBriques[0][0].GetType().ToString(), new Vector2(10, 10), Color.Red);
+                int nbr = murDeBrique.getNombreBriquesRestantes();
+                spriteBatch.DrawString(font_position, ( nbr == 0 ? "Gagne !!" : nbr.ToString()), new Vector2(10, 10), Color.Red);
                 spriteBatch.DrawString(font_log, Log, new Vector2(400, 10), Color.Blue);
             spriteBatch.End();
 
