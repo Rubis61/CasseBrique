@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using Casse_Brique.Content;
 #endregion
 
 namespace Casse_Brique
@@ -18,16 +19,17 @@ namespace Casse_Brique
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
         const int height = 720;
         const int width = 1280;
         public int getHeight() { return height; }
         public int getWidth() { return width; }
+        private KeyboardState lastKeyboardState;
 
         public Raquette Raquette { get; private set; }
-        Balle balle;
+        public Balle balle;
+
         public MurDeBrique murDeBrique { get; private set; }
-        
+        public Bonus bonus;
         SpriteFont font_position;
         SpriteFont font_log;
         public string Log { get; set; }
@@ -56,7 +58,7 @@ namespace Casse_Brique
             balle = new Balle(this, 5, 1, 1);
             balle.Initialize(width/2,height/2,25,25);
             murDeBrique = new MurDeBrique(this);
-            
+            bonus = new Bonus(this, 0, 0, 0);
             Log = "";
 
             //murDeBrique.générerMurDeBriqueDeBase();
@@ -77,6 +79,7 @@ namespace Casse_Brique
 
             // TODO: use this.Content to load your game content here
             Raquette.LoadContent(Content, "barre");
+            
             font_position = Content.Load<SpriteFont>("position");
             font_log = Content.Load<SpriteFont>("position");
             balle.LoadContent(Content, "balle");
@@ -105,10 +108,27 @@ namespace Casse_Brique
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            if(keyboardState.IsKeyDown(Keys.F1) && !lastKeyboardState.IsKeyDown(Keys.F1))
+            {
+                bonus.AgrandirLaRaquette();
+            }
+            if (keyboardState.IsKeyDown(Keys.F2) && !lastKeyboardState.IsKeyDown(Keys.F2))
+            {
+                bonus.RéduireLaRaquette();
+            }
+            if (keyboardState.IsKeyDown(Keys.F3) && !lastKeyboardState.IsKeyDown(Keys.F3))
+            {
+                bonus.AugmenterVitesseBalle();
+            }
+            if (keyboardState.IsKeyDown(Keys.F4) && !lastKeyboardState.IsKeyDown(Keys.F4))
+            {
+                bonus.RéduireVitesseBalle();
+            }
+
             // TODO: Add your update logic here
             Raquette.Update(gameTime, keyboardState);
             balle.Update(gameTime, keyboardState);
-
+            lastKeyboardState = keyboardState;
             base.Update(gameTime);
         }
 
