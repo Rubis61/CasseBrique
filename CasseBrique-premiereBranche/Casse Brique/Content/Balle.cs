@@ -13,6 +13,8 @@ namespace Casse_Brique
 {
     public class Balle : GameObject
     {
+        public bool colisionWithRaquette { get; set; }
+        public bool Aimanté { get; set; }
         private float Boost = 1;
         private Vector2 normal;
 
@@ -20,6 +22,7 @@ namespace Casse_Brique
             : base(game, vitesse, dirX, dirY)
         {
             Boost = 1;
+            Aimanté = true;
         }
 
         public override void Update(GameTime gametime, KeyboardState keyboardState)
@@ -35,6 +38,12 @@ namespace Casse_Brique
             collideWithRaquette();
             Boost = Math.Abs(Boost);
 
+            Direction.X = (Direction.X > 2) ? 2 : (Direction.X < -2) ? -2 : Direction.X;
+            if(Aimanté == true && colisionWithRaquette == true)
+            {
+                Vitesse = 0;
+                _rectangle.X += (int)(game.Raquette.Vitesse * game.Raquette.getDirection().X);
+            }
             //Direction.X = Direction.X * Boost;
             //Direction.Y = Direction.Y * Boost;
 
@@ -68,11 +77,12 @@ namespace Casse_Brique
             }
         }
 
-        private float collideWithRaquette()
+        public float collideWithRaquette()
         {
             //float boost = 1;
             if (game.Raquette.getRectangle().Intersects(_rectangle)) // Détection collision entre la balle et la raquete
             {
+                colisionWithRaquette = true;
                 game.Log = "Intersection !!";
 
                 Raquette raquette = game.Raquette;
@@ -109,7 +119,11 @@ namespace Casse_Brique
                 */
                 Direction.Y *= -1;
             }
-            else game.Log = "";
+            else
+            {
+                game.Log = "";
+                colisionWithRaquette = false;
+            }
 
             return Boost;
         }

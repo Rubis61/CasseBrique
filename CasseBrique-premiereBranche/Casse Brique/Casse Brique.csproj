@@ -56,6 +56,7 @@
     <Compile Include="Briques\Brique.cs" />
     <Compile Include="Briques\BriqueNormale.cs" />
     <Compile Include="Briques\BriqueBonus.cs" />
+    <Compile Include="Content\Bonus.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Content\GameObject.cs" />
     <Compile Include="Helpers\MapReader.cs" />

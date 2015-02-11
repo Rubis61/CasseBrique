@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using Casse_Brique.Content;
 
 namespace Casse_Brique
 {
@@ -18,6 +19,7 @@ namespace Casse_Brique
         public List<Brique[]> ligneBriques { get; set; }
         private const int distanceEntreBriques = 0;//15;
         private Game1 game;
+        private Bonus bonus; 
 
         public MurDeBrique(Game1 game)
         {
