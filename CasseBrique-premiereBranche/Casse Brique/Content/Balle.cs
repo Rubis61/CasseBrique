@@ -13,16 +13,19 @@ namespace Casse_Brique
 {
     public class Balle : GameObject
     {
+        public bool colisionWithRaquette { get; set; }
+        public bool Aimanté { get; set; }
         public Balle(Game1 game, int vitesse, float dirX, float dirY)
             : base(game, vitesse, dirX, dirY)
         {
-
+            Aimanté = true;
         }
 
         public override void Update(GameTime gametime, KeyboardState keyboardState)
         {
             int width = game.getWidth();
             int height = game.getHeight();
+
 
             collideWithScreen(width, height);
 
@@ -32,6 +35,12 @@ namespace Casse_Brique
             Direction.X = Direction.X * Math.Abs(collideWithRaquette());
 
             Direction.X = (Direction.X > 2) ? 2 : (Direction.X < -2) ? -2 : Direction.X;
+            if(Aimanté == true && colisionWithRaquette == true)
+            {
+                Vitesse = 0;
+                _rectangle.X += (int)(game.Raquette.Vitesse * game.Raquette.getDirection().X);
+            }
+
 
             base.Update(gametime, keyboardState);
         }
@@ -57,11 +66,12 @@ namespace Casse_Brique
             }
         }
 
-        private float collideWithRaquette()
+        public float collideWithRaquette()
         {
             float boost = 1;
             if (game.Raquette.getRectangle().Intersects(_rectangle)) // Détection collision entre la balle et la raquete
             {
+                colisionWithRaquette = true;
                 game.Log = "Intersection !!";
 
                 Raquette raquette = game.Raquette;
@@ -73,15 +83,19 @@ namespace Casse_Brique
                 bool boostGauche = _rectangle.X <= (milieuRaquette_X - distanceEntrePostionDuBoostEtLeMilieuDeLaRaquette_X);
                 bool boostDroit = _rectangle.X >= (milieuRaquette_X + distanceEntrePostionDuBoostEtLeMilieuDeLaRaquette_X);
 
-                if(boostGauche)
+                if (boostGauche)
                 {
-                    boost = (Direction.X<0)? -2 : -1;
+                    boost = (Direction.X < 0) ? -2 : -1;
                 }
-                else if(boostDroit) boost = (Direction.X > 0) ? 2 : 1;
+                else if (boostDroit) boost = (Direction.X > 0) ? 2 : 1;
 
                 Direction.Y *= -1;
             }
-            else game.Log = "";
+            else
+            {
+                game.Log = "";
+                colisionWithRaquette = false;
+            }
 
             return boost;
         }

@@ -30,6 +30,8 @@ namespace Casse_Brique
             return " X : " + _rectangle.X + " Y : " + _rectangle.Y;
         }
 
+        public Vector2 getDirection() { return Direction; }
+
         public Rectangle getRectangle() { return _rectangle; }
         public Texture2D getTexture() { return _texture; }
 
