@@ -1,4 +1,14 @@
 TO DO : 
-	- Charger la map
-	- Trouver texture des briques bonus etc...
-	- Coder toutes les collisions
+	- Trouver texture des Briques bonus, Images bonus etc...
+	- Définir les identifiants des briques (ex: 2=agrandir raquette)
+	- Coder le bonus
+	- MAP : Gérer les différentes briques
+	- Angle de projection différent sur la raquette
+	- Animations / particules
+
+
+
+	- Coder toutes les collisions (OK) a refaire à la fin
+
+
+Ajouter spawn de la balle dans le fichier de level ?

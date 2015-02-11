@@ -105,6 +105,7 @@ namespace Casse_Brique
                     Brique tmpBrique;
                     char[] tmpCharArray = map[ligne][colonne].ToCharArray();
                     char id = tmpCharArray[0];
+                    // Générer random si c'est une brique bonus
                     convertirBrique(out tmpBrique, id);
                     tmpLigneBriques[colonne] = tmpBrique;
                 }
@@ -141,7 +142,7 @@ namespace Casse_Brique
             {
                 for (int colonne = 0; colonne < map[ligne].Length; colonne++)
                 {
-                    
+                    // Transformer les null en briqueVide
                 }
             }
         }
@@ -156,7 +157,7 @@ namespace Casse_Brique
                 case '1':
                     brique = new BriqueNormale(game, 0, 0, 0);
                     break;
-                default:
+                default: // * pour null
                     brique = new BriqueVide(game, 0, 0, 0);
                     break;
             }
@@ -196,7 +197,7 @@ namespace Casse_Brique
 
                         if (!rectangleCollider.IsEmpty) // rectangle non null donc collision détectée
                         {
-                            brique = ligneBriques[ligne][colonne];
+                            brique  = ligneBriques[ligne][colonne];
                             //ligneBriques[ligne][colonne].unLoadContent();
                             //ligneBriques[ligne][colonne].isActive = false;
                             ligneBriques[ligne][colonne] = new BriqueVide(game, 0, 0, 0);
@@ -209,6 +210,20 @@ namespace Casse_Brique
             
             brique = null;
             return Rectangle.Empty;
+        }
+
+        public int getNombreBriquesRestantes()
+        {
+            int nombre = 0;
+
+            for (int ligne = 0; ligne < ligneBriques.Count; ligne++)
+            {
+                for (int colonne = 0; colonne < ligneBriques[ligne].Length; colonne++)
+                {
+                    if (ligneBriques[ligne][colonne].GetType().Name != "BriqueVide") nombre++;
+                }
+            }
+            return nombre;
         }
     }
 }

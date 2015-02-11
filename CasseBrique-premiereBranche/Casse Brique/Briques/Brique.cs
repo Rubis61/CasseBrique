@@ -18,7 +18,7 @@ namespace Casse_Brique
         public bool isActive { get; set; }
         //public Bonus Bonus { get; set; }
 
-        public Brique(Game1 game, int vitesse, int dirX, int dirY)
+        public Brique(Game1 game, int vitesse, float dirX, float dirY)
             : base(game, vitesse, dirX, dirY)
         {
             IsInfinite = false;

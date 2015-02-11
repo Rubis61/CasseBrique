@@ -13,7 +13,7 @@ namespace Casse_Brique
 {
     public class Raquette : GameObject
     {
-        public Raquette(Game1 game, int vitesse, int dirX, int dirY)
+        public Raquette(Game1 game, int vitesse, float dirX, float dirY)
             : base(game, vitesse, dirX, dirY)
         {
             
@@ -27,15 +27,15 @@ namespace Casse_Brique
 
             if (leftDown && _rectangle.X > 0)
             {
-                _dirX = -1;
+                Direction.X = -1;
             }
             else if (rightDown && (_rectangle.X + _rectangle.Width < width))
             {
-                _dirX = 1;
+                Direction.X = 1;
             }
             else
             {
-                _dirX = 0;
+                Direction.X = 0;
             }
 
             base.Update(gametime, keyboardState);

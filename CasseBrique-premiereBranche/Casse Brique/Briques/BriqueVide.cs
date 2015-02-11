@@ -13,7 +13,7 @@ namespace Casse_Brique
 {
     class BriqueVide : Brique
     {
-        public BriqueVide(Game1 game, int vitesse, int dirX, int dirY)
+        public BriqueVide(Game1 game, int vitesse, float dirX, float dirY)
             : base(game, vitesse, dirX, dirY)
         {
             IsInfinite = false;
