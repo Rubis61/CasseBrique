@@ -22,7 +22,7 @@ namespace Casse_Brique
             : base(game, vitesse, dirX, dirY)
         {
             Boost = 1;
-            Aimanté = true;
+            Aimanté = false;
         }
 
         public override void Update(GameTime gametime, KeyboardState keyboardState)

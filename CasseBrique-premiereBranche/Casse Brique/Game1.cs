@@ -32,8 +32,6 @@ namespace Casse_Brique
         public int getWidth() { return width; }
         private KeyboardState lastKeyboardState;
 
-        private KeyboardState lastKeyboardState;
-
         public Raquette Raquette { get; private set; }
         public Balle balle;
         
@@ -133,10 +131,19 @@ namespace Casse_Brique
             {
                 bonus.RéduireVitesseBalle();
             }
+            if (keyboardState.IsKeyDown(Keys.F5) && !lastKeyboardState.IsKeyDown(Keys.F4))
+            {
+                balle.Aimanté = !balle.Aimanté;
+            }
+            if(keyboardState.IsKeyDown(Keys.Space) && !lastKeyboardState.IsKeyDown(Keys.Space))
+            {
+                isPaused = !isPaused;
+            }
 
-            // TODO: Add your update logic here
-            Raquette.Update(gameTime, keyboardState);
-            balle.Update(gameTime, keyboardState);
+            if (!isPaused)
+            {
+                Raquette.Update(gameTime, keyboardState);
+                balle.Update(gameTime, keyboardState);
             }
 
             if (keyboardState.IsKeyDown(Keys.R))
