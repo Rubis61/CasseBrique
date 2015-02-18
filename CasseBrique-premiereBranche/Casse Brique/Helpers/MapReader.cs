@@ -18,12 +18,11 @@ namespace Casse_Brique
     private static void readLigneFichier(int level)
     {
         System.IO.StreamReader file = new System.IO.StreamReader(directory+"\\level\\level" + level +".txt");
-
+        y = 0;
         while((line = file.ReadLine()) != null)
         {
             tabLine[y] = line;
             y++;
-
         }
         file.Close();
     }
