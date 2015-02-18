@@ -15,13 +15,15 @@ namespace Casse_Brique
     public class GameObject
     {
         protected Rectangle _rectangle;
+        public Vector2 Position;
         protected Texture2D _texture;
-        protected float dirX;
-        protected int dirY;
+        //protected float dirX;
+        //protected int dirY;
         //protected int vitesse;
         //protected Vector2 Position;
         protected Vector2 Direction;
         protected Game1 game;
+        protected Vector2 Scale;
 
         public float Vitesse { get; set; }
 
@@ -47,6 +49,7 @@ namespace Casse_Brique
         public virtual void Initialize(int posX, int posY, int width, int height )
         {
             _rectangle = new Rectangle(posX, posY, width, height);
+            Position = new Vector2(posX, posY);
             //Position = new Vector2(posX, posY);
         }
 
@@ -63,16 +66,16 @@ namespace Casse_Brique
 
         public virtual void Update(GameTime gametime, KeyboardState keyboardState)
         {
-            //_rectangle.X += (int)(vitesse * __rectangle.X);
-            //Position += Vitesse * Direction;
             _rectangle.X += (int)(Vitesse * Direction.X);
             _rectangle.Y += (int)(Vitesse * Direction.Y);
-            //_rectangle.Y += vitesse * __rectangle.Y;
+            Position.X += Vitesse * Direction.X;
+            Position.Y += Vitesse * Direction.Y;
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gametime)
         {
-            spriteBatch.Draw(_texture, _rectangle, Color.White);
+            //spriteBatch.Draw(_texture, new Rectangle((int)Position.X, (int)Position.Y, _rectangle.Width, _rectangle.Height), Color.White);
+            spriteBatch.Draw(_texture, Position, null, Color.White, 0f, Vector2.Zero, new Vector2(0.2f), SpriteEffects.None, 0f);
         }
     }
 }

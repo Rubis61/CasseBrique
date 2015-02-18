@@ -16,7 +16,7 @@ namespace Casse_Brique
         public Raquette(Game1 game, int vitesse, float dirX, float dirY)
             : base(game, vitesse, dirX, dirY)
         {
-            
+            Scale = new Vector2(0.1f);
         }
 
         public override void Update(GameTime gametime, KeyboardState keyboardState)
@@ -25,11 +25,11 @@ namespace Casse_Brique
             bool rightDown = keyboardState.IsKeyDown(Keys.Right);
             int width = game.getWidth();
 
-            if (leftDown && _rectangle.X > 0)
+            if (leftDown && Position.X > 0)
             {
                 Direction.X = -1;
             }
-            else if (rightDown && (_rectangle.X + _rectangle.Width < width))
+            else if (rightDown && (Position.X + _rectangle.Width < width))
             {
                 Direction.X = 1;
             }
@@ -41,9 +41,26 @@ namespace Casse_Brique
             base.Update(gametime, keyboardState);
         }
 
+        public void Agrandir()
+        {
+            Initialize(_rectangle.X - (17 / 2), _rectangle.Y, (int)(_rectangle.Width * 1.1), 28);
+            Scale.X *= 1.1f;
+        }
+
+        public void Reduire()
+        {
+            Initialize(_rectangle.X - (17 / 2), _rectangle.Y, (int)(_rectangle.Width / 1.1), 28);
+            Scale.X /= 1.1f;
+        }
+
         public override void LoadContent(ContentManager content, string nom)
         {
             _texture = game.Content.Load<Texture2D>("barre");
+        }
+
+        public override void Draw(SpriteBatch spriteBatch, GameTime gametime)
+        {
+            spriteBatch.Draw(_texture, Position, null, Color.White, 0f, Vector2.Zero, Scale, SpriteEffects.None, 0f);
         }
     }
 }

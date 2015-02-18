@@ -19,7 +19,7 @@ namespace Casse_Brique
     /// </summary>
     public class Game1 : Game
     {
-        private static int ESPACE_BALLE_RAQUETTE_INIT = 40;
+        public static int ESPACE_BALLE_RAQUETTE_INIT = 40;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -115,25 +115,31 @@ namespace Casse_Brique
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if(keyboardState.IsKeyDown(Keys.F1) && !lastKeyboardState.IsKeyDown(Keys.F1))
+            if(keyboardState.IsKeyDown(Keys.F1) )
             {
                 bonus.AgrandirLaRaquette();
             }
-            if (keyboardState.IsKeyDown(Keys.F2) && !lastKeyboardState.IsKeyDown(Keys.F2))
+            if (keyboardState.IsKeyDown(Keys.F2) )
             {
                 bonus.RéduireLaRaquette();
             }
             if (keyboardState.IsKeyDown(Keys.F3) && !lastKeyboardState.IsKeyDown(Keys.F3))
             {
-                bonus.AugmenterVitesseBalle();
+                bonus.RéduireVitesseBalle();
             }
             if (keyboardState.IsKeyDown(Keys.F4) && !lastKeyboardState.IsKeyDown(Keys.F4))
             {
-                bonus.RéduireVitesseBalle();
+                bonus.AugmenterVitesseBalle();
             }
             if (keyboardState.IsKeyDown(Keys.F5) && !lastKeyboardState.IsKeyDown(Keys.F4))
             {
-                balle.Aimanté = !balle.Aimanté;
+                //balle.Aimanté = !balle.Aimanté;
+                if (balle.Aimanté)
+                {
+                    balle.Aimanté = false;
+                    
+                }
+                else balle.Aimanté = true;
             }
             if(keyboardState.IsKeyDown(Keys.Space) && !lastKeyboardState.IsKeyDown(Keys.Space))
             {

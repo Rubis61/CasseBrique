@@ -109,11 +109,12 @@ namespace Casse_Brique
                     char id = tmpCharArray[0];
                     // Générer random si c'est une brique bonus
                     convertirBrique(out tmpBrique, id);
+                    
                     tmpLigneBriques[colonne] = tmpBrique;
                 }
 
                 //if( tmpLigneBriques == null ) tmpLigneBriques = créerBriquesVides(tmpLigneBriques);
-
+                
                 ligneBriques.Add(tmpLigneBriques);
             }
         }
@@ -202,6 +203,7 @@ namespace Casse_Brique
                             brique  = ligneBriques[ligne][colonne];
                             //ligneBriques[ligne][colonne].unLoadContent();
                             //ligneBriques[ligne][colonne].isActive = false;
+                            
                             ligneBriques[ligne][colonne] = new BriqueVide(game, 0, 0, 0);
 
                             return rectangleCollider;

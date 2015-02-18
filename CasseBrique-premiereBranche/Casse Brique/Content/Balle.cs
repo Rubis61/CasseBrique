@@ -42,7 +42,10 @@ namespace Casse_Brique
             if(Aimanté == true && colisionWithRaquette == true)
             {
                 Vitesse = 0;
-                _rectangle.X += (int)(game.Raquette.Vitesse * game.Raquette.getDirection().X);
+                //_rectangle.X += (int)(game.Raquette.Vitesse * game.Raquette.getDirection().X);
+                Position.X += game.Raquette.Vitesse * game.Raquette.getDirection().X;
+                //Position.X = game.Raquette.Position.X/2 - _rectangle.Width/2;
+                //Position.Y = game.Raquette.Position.Y - Game1.ESPACE_BALLE_RAQUETTE_INIT;
             }
             //Direction.X = Direction.X * Boost;
             //Direction.Y = Direction.Y * Boost;
@@ -50,8 +53,10 @@ namespace Casse_Brique
             //Direction.X = (Direction.X > 2) ? 2 : (Direction.X < -2) ? -2 : Direction.X;
             //Direction.Y = (Direction.Y > 2) ? 2 : (Direction.Y < -2) ? -2 : Direction.Y;
 
-            _rectangle.X += (int)normal.X;
-            _rectangle.Y += (int)normal.Y;
+            //_rectangle.X += (int)normal.X;
+            //_rectangle.Y += (int)normal.Y;
+            //Position.Y += (int)normal.Y;
+            //Position.Y += (int)normal.Y;
 
             base.Update(gametime, keyboardState);
         }
@@ -59,19 +64,19 @@ namespace Casse_Brique
         private void collideWithScreen(int width, int height)
         {
             // Intersection avec les bords de l'écran
-            if (_rectangle.X <= 0) // bord gauche
+            if (Position.X <= 0) // bord gauche
             {
                 Direction.X = 1;
             }
-            else if ((_rectangle.X + _rectangle.Width >= width)) // bord droit
+            else if ((Position.X + _rectangle.Width >= width)) // bord droit
             {
                 Direction.X = -1;
             }
-            if (_rectangle.Y <= 0) // bord haut
+            if (Position.Y <= 0) // bord haut
             {
                 Direction.Y = 1;
             }
-            else if ((_rectangle.Y + _rectangle.Height) >= height) // bord bas
+            else if ((Position.Y + _rectangle.Height) >= height) // bord bas
             {
                 Direction.Y = -1;
             }
@@ -88,6 +93,7 @@ namespace Casse_Brique
                 Raquette raquette = game.Raquette;
                 Rectangle posRaquette = raquette.getRectangle();
                 Texture2D textureRaquette = raquette.getTexture();
+
                 /*
                 int milieuRaquette_X = (posRaquette.X + textureRaquette.Width) / 2;
                 int distanceEntrePostionDuBoostEtLeMilieuDeLaRaquette_X = textureRaquette.Width * 1 / 3;
@@ -96,7 +102,7 @@ namespace Casse_Brique
                 */
 
                 float distanceDroiteGauche = raquette.getRectangle().Width;
-                float positionXballe = _rectangle.X - ( raquette.getRectangle().X - raquette.getRectangle().Width/2 );
+                float positionXballe = Position.X - (raquette.getRectangle().X - raquette.getRectangle().Width / 2);
                 float pourcentage = positionXballe / distanceDroiteGauche;
 
                 if(pourcentage < 0.33f)
@@ -135,7 +141,7 @@ namespace Casse_Brique
 
             if (!collideWithBrique.IsEmpty) // Collision entre la balle et une brique OK
             {
-                Vector2 milieuBalle = new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2);
+                Vector2 milieuBalle = new Vector2(Position.X + _rectangle.Width / 2, Position.Y + _rectangle.Height / 2);
 
                 if (Direction.X == 1) // Direction de la balle vers la droite
                 {
@@ -175,7 +181,7 @@ namespace Casse_Brique
                             Direction.Y = 1; // projection vers le bas
                         }
                     }
-                    else // // La balle descend
+                    else // La balle descend
                     {
                         if (collideWithBrique.Y > milieuBalle.Y) // Collision bord haut
                         {
@@ -193,6 +199,11 @@ namespace Casse_Brique
         public override void LoadContent(ContentManager content, string nom)
         {
             _texture = game.Content.Load<Texture2D>("balle");
+        }
+
+        public override void Draw(SpriteBatch spriteBatch, GameTime gametime)
+        {
+            spriteBatch.Draw(_texture, Position, null, Color.White, 0f, Vector2.Zero, new Vector2(0.15625f), SpriteEffects.None, 0f);
         }
     }
 }

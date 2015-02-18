@@ -30,5 +30,10 @@ namespace Casse_Brique
         {
             _texture = game.Content.Load<Texture2D>("brick016");
         }
+
+        public override void Draw(SpriteBatch spriteBatch, GameTime gametime)
+        {
+            spriteBatch.Draw(_texture, Position, null, Color.White, 0f, Vector2.Zero, new Vector2(0.25f), SpriteEffects.None, 0f);
+        }
     }
 }

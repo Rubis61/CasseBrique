@@ -16,6 +16,8 @@ namespace Casse_Brique.Content
         GraphicsDevice graphicsDevice;
         SpriteBatch spriteBatch;
         GameTime gametime;
+
+        public int Pourcentage { get; set; }
         //Game1 game;
         public Bonus(Game1 game, int vitesse, float dirX, float dirY)
         : base(game, vitesse, dirX, dirY)
@@ -24,11 +26,13 @@ namespace Casse_Brique.Content
         }
         public void AgrandirLaRaquette()
         {
-            game.Raquette.Initialize(game.Raquette.getRectangle().X - (130 / 2), game.Raquette.getRectangle().Y, game.Raquette.getRectangle().Width*2, 28);
+            //game.Raquette.Initialize(game.Raquette.getRectangle().X - (130 / 2), game.Raquette.getRectangle().Y, game.Raquette.getRectangle().Width*2, 28);
+            game.Raquette.Agrandir();
         }
         public void RéduireLaRaquette()
         {
-            game.Raquette.Initialize(game.Raquette.getRectangle().X - (130 / 2), game.Raquette.getRectangle().Y, game.Raquette.getRectangle().Width / 2, 28);
+            //game.Raquette.Initialize(game.Raquette.getRectangle().X - (130 / 2), game.Raquette.getRectangle().Y, game.Raquette.getRectangle().Width / 2, 28);
+            game.Raquette.Reduire();
         }
         public void AugmenterVitesseBalle()
         {

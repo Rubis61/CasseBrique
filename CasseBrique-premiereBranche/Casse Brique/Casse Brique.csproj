@@ -59,6 +59,7 @@
     <Compile Include="Content\Bonus.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Content\GameObject.cs" />
+    <Compile Include="Helpers\HelperBonus.cs" />
     <Compile Include="Helpers\MapReader.cs" />
     <Compile Include="Content\MurDeBrique.cs" />
     <Compile Include="Program.cs" />
