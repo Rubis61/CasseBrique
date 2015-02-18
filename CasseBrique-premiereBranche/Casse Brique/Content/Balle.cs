@@ -18,7 +18,7 @@ namespace Casse_Brique
         public Balle(Game1 game, int vitesse, float dirX, float dirY)
             : base(game, vitesse, dirX, dirY)
         {
-            Aimanté = true;
+            Aimanté = false;
         }
 
         public override void Update(GameTime gametime, KeyboardState keyboardState)

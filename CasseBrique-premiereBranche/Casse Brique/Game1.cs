@@ -124,7 +124,16 @@ namespace Casse_Brique
             {
                 bonus.RéduireVitesseBalle();
             }
-
+            if (keyboardState.IsKeyDown(Keys.F5) && !lastKeyboardState.IsKeyDown(Keys.F5))
+            {
+                balle.Aimanté = true;
+            }
+            if (keyboardState.IsKeyDown(Keys.F6) && !lastKeyboardState.IsKeyDown(Keys.F6))
+            {
+                balle.Aimanté = false;
+                balle._rectangle.Y -= 5;
+                balle.Vitesse = 5;
+            }
             // TODO: Add your update logic here
             Raquette.Update(gameTime, keyboardState);
             balle.Update(gameTime, keyboardState);

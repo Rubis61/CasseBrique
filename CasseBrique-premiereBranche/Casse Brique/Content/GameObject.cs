@@ -14,7 +14,7 @@ namespace Casse_Brique
 {
     public class GameObject
     {
-        protected Rectangle _rectangle;
+        public Rectangle _rectangle;
         protected Texture2D _texture;
         protected float dirX;
         protected int dirY;
