@@ -172,7 +172,7 @@ namespace Casse_Brique
             {
                 foreach (var brique in ligneBrique)
                 {
-                    brique.LoadContent(content, "brick016");
+                    brique.LoadContent(content, "twix");
                 }
             }
         }

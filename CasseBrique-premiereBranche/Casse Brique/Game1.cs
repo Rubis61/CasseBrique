@@ -81,7 +81,7 @@ namespace Casse_Brique
             Raquette = new Raquette(this, 10, 0, 0);
             Raquette.Initialize((width/2)-(135/2)-3, height * 19 / 20, 130, 28);
             balle = new Balle(this, 4, 1, -1);
-            balle.Initialize(width/2 - 24/2, Raquette.getRectangle().Y - ESPACE_BALLE_RAQUETTE_INIT,25,25);
+            balle.Initialize(width/2 - 24/2, Raquette.getRectangle().Y - ESPACE_BALLE_RAQUETTE_INIT, 25,25);
             murDeBrique = new MurDeBrique(this);
             //bonus = new Bonus(this, 0, 0, 0, TypeBonus.Aucun);
             ListBonus = new List<Bonus>();
