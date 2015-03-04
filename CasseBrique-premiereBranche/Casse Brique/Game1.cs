@@ -34,7 +34,7 @@ namespace Casse_Brique
 
         public Raquette Raquette { get; private set; }
         public Balle balle;
-
+        
         public List<Bonus> ListBonus { get; set; }
         
         public MurDeBrique murDeBrique { get; private set; }
@@ -148,23 +148,20 @@ namespace Casse_Brique
             {
                 Bonus.AugmenterVitesseBalle(this);
             }
-            if (keyboardState.IsKeyDown(Keys.F5) && !lastKeyboardState.IsKeyDown(Keys.F4))
+            if (keyboardState.IsKeyDown(Keys.F5) && !lastKeyboardState.IsKeyDown(Keys.F5))
             {
-                //balle.Aimanté = !balle.Aimanté;
-                if (balle.Aimanté)
-                {
-                    balle.Aimanté = false;
-                    
-                }
+                balle.Aimanté = true;
+            }
+            if (keyboardState.IsKeyDown(Keys.F6) && !lastKeyboardState.IsKeyDown(Keys.F6))
                 else balle.Aimanté = true;
             }
             if(keyboardState.IsKeyDown(Keys.Space) && !lastKeyboardState.IsKeyDown(Keys.Space))
             {
-                isPaused = !isPaused;
+                balle.Aimanté = false;
+                balle._rectangle.Y -= 5;
+                balle.Vitesse = 5;
             }
-
-            if (!isPaused)
-            {
+            // TODO: Add your update logic here
                 Raquette.Update(gameTime, keyboardState);
                 balle.Update(gameTime, keyboardState);
 

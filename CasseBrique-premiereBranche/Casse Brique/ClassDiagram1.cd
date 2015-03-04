@@ -10,7 +10,7 @@
   <Class Name="Casse_Brique.Balle">
     <Position X="2.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAIAgAAAAAAAAAAAAAEAAAAAQABAAAAQ=</HashCode>
+      <HashCode>AAQAAAAAAAAAAIAgAAAAAAgAQAAAAEAAAAAQABAAAAQ=</HashCode>
       <FileName>Content\Balle.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,7 +38,7 @@
   <Class Name="Casse_Brique.Program" Collapsed="true">
     <Position X="9" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -81,16 +81,11 @@
     <Position X="4.5" Y="8" Width="1.5" />
     <InheritanceLine Type="Casse_Brique.Brique" FixedToPoint="true">
       <Path>
-        <Point X="0.5" Y="6.381" />
-        <Point X="0.34" Y="6.381" />
-        <Point X="0.34" Y="5.227" />
-        <Point X="2.24" Y="5.227" />
-        <Point X="2.24" Y="0.34" />
-        <Point X="4.41" Y="0.34" />
-        <Point X="4.41" Y="5.09" />
-        <Point X="4.34" Y="5.09" />
-        <Point X="4.34" Y="7.76" />
-        <Point X="5.25" Y="7.76" />
+        <Point X="1.25" Y="5.25" />
+        <Point X="1.25" Y="5.227" />
+        <Point X="4.484" Y="5.227" />
+        <Point X="4.484" Y="7.977" />
+        <Point X="5.25" Y="7.977" />
         <Point X="5.25" Y="8" />
       </Path>
     </InheritanceLine>
