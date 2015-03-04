@@ -162,6 +162,7 @@ namespace Casse_Brique
                 balle.Vitesse = 5;
             }
             // TODO: Add your update logic here
+            
                 Raquette.Update(gameTime, keyboardState);
                 balle.Update(gameTime, keyboardState);
 
