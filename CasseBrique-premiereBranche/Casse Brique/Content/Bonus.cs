@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Casse_Brique.Content
 {
-    public enum TypeBonus { Aucun, RaquetteAgrandie, RaquetteReduite, VitesseBalleAugmentée };
+    public enum TypeBonus { Aucun, RaquetteAgrandie, RaquetteReduite, VitesseBalleAugmentée, VitesseBalleRéduite };
 
     public class Bonus : GameObject
     {
@@ -52,8 +52,14 @@ namespace Casse_Brique.Content
         }
         public override void Initialize(int posX, int posY, int width, int height )
         {
-            _rectangle = new Rectangle(posX, posY, (int)(width*0.15625f), (int)(height*0.15625f));
+            _rectangle = new Rectangle(posX, posY, (int)(width), (int)(height));
+            //_rectangle = new Rectangle(posX, posY, (int)(width * 0.15625f), (int)(height * 0.15625f));
             Position = new Vector2(posX, posY);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch, GameTime gametime)
+        {
+            spriteBatch.Draw(_texture, Position, null, Color.White, 0f, Vector2.Zero, new Vector2(1f), SpriteEffects.None, 0f);
         }
     }
 }

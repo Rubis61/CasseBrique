@@ -32,6 +32,7 @@ namespace Casse_Brique
         public int getWidth() { return width; }
         private KeyboardState lastKeyboardState;
 
+        public Background Background { get; set; }
         public Raquette Raquette { get; private set; }
         public Balle balle;
         
@@ -54,14 +55,14 @@ namespace Casse_Brique
 
         public void AjouterBonus(Bonus bonus, int x, int y)
         {
-            bonus.LoadContent(Content, "balle");
+            bonus.LoadContent(Content, "m&ms rouge");
             bonus.Initialize(x, y, bonus.getTexture().Width, bonus.getTexture().Height);
             ListBonus.Add(bonus);
         }
 
         public void AjouterBonus(Bonus bonus, Rectangle rect)
         {
-            bonus.LoadContent(Content, "balle");
+            bonus.LoadContent(Content, "m&ms rouge");
             bonus.Initialize(rect.X, rect.Y, rect.Width, rect.Height);
             ListBonus.Add(bonus);
         }
@@ -76,6 +77,7 @@ namespace Casse_Brique
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            Background = new Background(this);
             Raquette = new Raquette(this, 10, 0, 0);
             Raquette.Initialize((width/2)-(135/2)-3, height * 19 / 20, 130, 28);
             balle = new Balle(this, 4, 1, -1);
@@ -102,6 +104,7 @@ namespace Casse_Brique
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            Background.LoadContent(Content, "paysage-bonbon");
             Raquette.LoadContent(Content, "barre");
             
             font_position = Content.Load<SpriteFont>("position");
@@ -206,6 +209,9 @@ namespace Casse_Brique
                         case TypeBonus.VitesseBalleAugmentée:
                             Bonus.AugmenterVitesseBalle(this);
                             break;
+                        case TypeBonus.VitesseBalleRéduite:
+                            Bonus.RéduireVitesseBalle(this);
+                            break;
                         default:
                             break;
                     }
@@ -228,6 +234,7 @@ namespace Casse_Brique
             
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+                Background.Draw(spriteBatch, gameTime);
                 Raquette.Draw(spriteBatch, gameTime);
                 balle.Draw(spriteBatch, gameTime);
                 murDeBrique.drawBriques(spriteBatch, gameTime);

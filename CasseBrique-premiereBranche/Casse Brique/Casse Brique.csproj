@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Briques\BriqueIncassable.cs" />
     <Compile Include="Briques\BriqueVide.cs" />
+    <Compile Include="Content\Background.cs" />
     <Compile Include="Content\Balle.cs" />
     <Compile Include="Briques\Brique.cs" />
     <Compile Include="Briques\BriqueNormale.cs" />
