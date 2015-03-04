@@ -15,7 +15,7 @@ namespace Casse_Brique.Content
         ContentManager content;
         GraphicsDevice graphicsDevice;
         SpriteBatch spriteBatch;
-        GameTime gametime;
+        GameTime gametime; 
         //Game1 game;
         public Bonus(Game1 game, int vitesse, float dirX, float dirY)
         : base(game, vitesse, dirX, dirY)

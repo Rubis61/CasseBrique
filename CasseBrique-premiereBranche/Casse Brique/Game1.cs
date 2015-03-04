@@ -144,7 +144,7 @@ namespace Casse_Brique
             // TODO: Add your update logic here
             Raquette.Update(gameTime, keyboardState);
             balle.Update(gameTime, keyboardState);
-            }
+          //  }
 
             if (keyboardState.IsKeyDown(Keys.R))
             {
