@@ -16,7 +16,7 @@ namespace Casse_Brique
         public Raquette(Game1 game, int vitesse, float dirX, float dirY)
             : base(game, vitesse, dirX, dirY)
         {
-            Scale = new Vector2(0.1f);
+            Scale = new Vector2(1f);
         }
 
         public override void Update(GameTime gametime, KeyboardState keyboardState)
@@ -57,7 +57,7 @@ namespace Casse_Brique
 
         public override void LoadContent(ContentManager content, string nom)
         {
-            _texture = game.Content.Load<Texture2D>("barre");
+            _texture = game.Content.Load<Texture2D>(nom);
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gametime)

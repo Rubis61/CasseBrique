@@ -83,43 +83,36 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="kinder_bueno.png">
-      <Name>kinder_bueno</Name>
+    <Compile Include="balisto.jpg">
+      <Name>balisto</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="kinder-surprise.png">
-      <Name>kinder-surprise</Name>
+    <Compile Include="lion.png">
+      <Name>lion</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="malabar.png">
-      <Name>malabar</Name>
+    <Compile Include="kitkat.jpg">
+      <Name>kitkat</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="mmsorange.png">
-      <Name>mmsorange</Name>
+    <Compile Include="twix.jpg">
+      <Name>twix</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="mmsbleu.png">
-      <Name>mmsbleu</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="mars.png">
-      <Name>mars</Name>
+    <Compile Include="carambar %282%29.png">
+      <Name>carambar %282%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
