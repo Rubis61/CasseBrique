@@ -153,15 +153,18 @@ namespace Casse_Brique
                 balle.Aimanté = true;
             }
             if (keyboardState.IsKeyDown(Keys.F6) && !lastKeyboardState.IsKeyDown(Keys.F6))
-                else balle.Aimanté = true;
+            {
+                balle.Aimanté = false;
+                balle.Position.Y -= 5;
+                balle.Vitesse = 5;
             }
             if(keyboardState.IsKeyDown(Keys.Space) && !lastKeyboardState.IsKeyDown(Keys.Space))
             {
-                balle.Aimanté = false;
-                balle._rectangle.Y -= 5;
-                balle.Vitesse = 5;
+                isPaused = !isPaused;
             }
-            // TODO: Add your update logic here
+            
+            if(isPaused)
+            {
                 Raquette.Update(gameTime, keyboardState);
                 balle.Update(gameTime, keyboardState);
 
