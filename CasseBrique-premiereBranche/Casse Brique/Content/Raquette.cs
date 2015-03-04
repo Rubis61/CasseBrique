@@ -43,14 +43,16 @@ namespace Casse_Brique
 
         public void Agrandir()
         {
-            Initialize(_rectangle.X - (17 / 2), _rectangle.Y, (int)(_rectangle.Width * 1.1), 28);
-            Scale.X *= 1.1f;
+            Initialize(game.Raquette.getRectangle().X - (130 / 2), game.Raquette.getRectangle().Y, game.Raquette.getRectangle().Width*2, 28);
+            //Initialize(_rectangle.X - (17 / 2), _rectangle.Y, (int)(_rectangle.Width * 1.1), 28);
+            Scale.X *= 2f;
         }
 
         public void Reduire()
         {
-            Initialize(_rectangle.X - (17 / 2), _rectangle.Y, (int)(_rectangle.Width / 1.1), 28);
-            Scale.X /= 1.1f;
+            Initialize(game.Raquette.getRectangle().X - (130 / 2), game.Raquette.getRectangle().Y, game.Raquette.getRectangle().Width / 2, 28);
+            //Initialize(_rectangle.X - (17 / 2), _rectangle.Y, (int)(_rectangle.Width / 1.1), 28);
+            Scale.X /= 2f;
         }
 
         public override void LoadContent(ContentManager content, string nom)

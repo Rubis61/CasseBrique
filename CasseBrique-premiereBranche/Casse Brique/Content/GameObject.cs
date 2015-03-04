@@ -23,7 +23,7 @@ namespace Casse_Brique
         //protected Vector2 Position;
         protected Vector2 Direction;
         protected Game1 game;
-        protected Vector2 Scale;
+        public Vector2 Scale;
 
         public float Vitesse { get; set; }
 
@@ -34,7 +34,7 @@ namespace Casse_Brique
 
         public Vector2 getDirection() { return Direction; }
 
-        public Rectangle getRectangle() { return _rectangle; }
+        public Rectangle getRectangle() { return new Rectangle((int)Position.X, (int)Position.Y, _rectangle.Width, _rectangle.Height); }
         public Texture2D getTexture() { return _texture; }
 
         public GameObject(Game1 game, float vitesse, float dirX, float dirY)

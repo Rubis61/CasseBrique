@@ -8,6 +8,8 @@ using System.Text;
 
 namespace Casse_Brique.Content
 {
+    public enum TypeBonus { Aucun, RaquetteAgrandie, RaquetteReduite, VitesseBalleAugmentée };
+
     public class Bonus : GameObject
     {
         Rectangle rectangle;
@@ -17,38 +19,41 @@ namespace Casse_Brique.Content
         SpriteBatch spriteBatch;
         GameTime gametime;
 
+        public TypeBonus TypeBonus { get; set; }
+
         public int Pourcentage { get; set; }
         //Game1 game;
-        public Bonus(Game1 game, int vitesse, float dirX, float dirY)
+        public Bonus(Game1 game, int vitesse, float dirX, float dirY, TypeBonus typeBonus, int pourcentage)
         : base(game, vitesse, dirX, dirY)
         {
-
+            TypeBonus = typeBonus;
+            Pourcentage = pourcentage;
         }
-        public void AgrandirLaRaquette()
+        public static void AgrandirLaRaquette(Game1 game)
         {
-            //game.Raquette.Initialize(game.Raquette.getRectangle().X - (130 / 2), game.Raquette.getRectangle().Y, game.Raquette.getRectangle().Width*2, 28);
             game.Raquette.Agrandir();
         }
-        public void RéduireLaRaquette()
+        public static void RéduireLaRaquette(Game1 game)
         {
             //game.Raquette.Initialize(game.Raquette.getRectangle().X - (130 / 2), game.Raquette.getRectangle().Y, game.Raquette.getRectangle().Width / 2, 28);
             game.Raquette.Reduire();
         }
-        public void AugmenterVitesseBalle()
+        public static void AugmenterVitesseBalle(Game1 game)
         {
             game.balle.Vitesse += 2;
         }
-        public void RéduireVitesseBalle()
+        public static void RéduireVitesseBalle(Game1 game)
         {
             game.balle.Vitesse -= 2;
         }
         public override void LoadContent(ContentManager content, string nom)
         {
-            _texture = game.Content.Load<Texture2D>("choux");
+            _texture = game.Content.Load<Texture2D>(nom);
         }
         public override void Initialize(int posX, int posY, int width, int height )
         {
-            _rectangle = new Rectangle(posX, posY, width, height);
+            _rectangle = new Rectangle(posX, posY, (int)(width*0.15625f), (int)(height*0.15625f));
+            Position = new Vector2(posX, posY);
         }
     }
 }

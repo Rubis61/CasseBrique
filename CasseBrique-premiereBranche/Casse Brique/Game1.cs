@@ -34,6 +34,8 @@ namespace Casse_Brique
 
         public Raquette Raquette { get; private set; }
         public Balle balle;
+
+        public List<Bonus> ListBonus { get; set; }
         
         public MurDeBrique murDeBrique { get; private set; }
         public Bonus bonus;
@@ -48,6 +50,20 @@ namespace Casse_Brique
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
+        }
+
+        public void AjouterBonus(Bonus bonus, int x, int y)
+        {
+            bonus.LoadContent(Content, "balle");
+            bonus.Initialize(x, y, bonus.getTexture().Width, bonus.getTexture().Height);
+            ListBonus.Add(bonus);
+        }
+
+        public void AjouterBonus(Bonus bonus, Rectangle rect)
+        {
+            bonus.LoadContent(Content, "balle");
+            bonus.Initialize(rect.X, rect.Y, rect.Width, rect.Height);
+            ListBonus.Add(bonus);
         }
 
         /// <summary>
@@ -65,7 +81,8 @@ namespace Casse_Brique
             balle = new Balle(this, 4, 1, -1);
             balle.Initialize(width/2 - 24/2, Raquette.getRectangle().Y - ESPACE_BALLE_RAQUETTE_INIT,25,25);
             murDeBrique = new MurDeBrique(this);
-            bonus = new Bonus(this, 0, 0, 0);
+            //bonus = new Bonus(this, 0, 0, 0, TypeBonus.Aucun);
+            ListBonus = new List<Bonus>();
             Log = "";
 
             //murDeBrique.générerMurDeBriqueDeBase();
@@ -115,21 +132,21 @@ namespace Casse_Brique
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if(keyboardState.IsKeyDown(Keys.F1) )
+            if (keyboardState.IsKeyDown(Keys.F1) && !lastKeyboardState.IsKeyDown(Keys.F1))
             {
-                bonus.AgrandirLaRaquette();
+                Bonus.AgrandirLaRaquette(this);
             }
-            if (keyboardState.IsKeyDown(Keys.F2) )
+            if (keyboardState.IsKeyDown(Keys.F2) && !lastKeyboardState.IsKeyDown(Keys.F2))
             {
-                bonus.RéduireLaRaquette();
+                Bonus.RéduireLaRaquette(this);
             }
             if (keyboardState.IsKeyDown(Keys.F3) && !lastKeyboardState.IsKeyDown(Keys.F3))
             {
-                bonus.RéduireVitesseBalle();
+                Bonus.RéduireVitesseBalle(this);
             }
             if (keyboardState.IsKeyDown(Keys.F4) && !lastKeyboardState.IsKeyDown(Keys.F4))
             {
-                bonus.AugmenterVitesseBalle();
+                Bonus.AugmenterVitesseBalle(this);
             }
             if (keyboardState.IsKeyDown(Keys.F5) && !lastKeyboardState.IsKeyDown(Keys.F4))
             {
@@ -150,6 +167,12 @@ namespace Casse_Brique
             {
                 Raquette.Update(gameTime, keyboardState);
                 balle.Update(gameTime, keyboardState);
+
+                foreach (var bonus in ListBonus)
+                {
+                    bonus.Update(gameTime, keyboardState);
+                }
+                CollideListBonusWithRaquette();
             }
 
             if (keyboardState.IsKeyDown(Keys.R))
@@ -160,6 +183,39 @@ namespace Casse_Brique
             lastKeyboardState = keyboardState;
 
             base.Update(gameTime);
+        }
+
+        private void CollideListBonusWithRaquette()
+        {
+            List<Bonus> ToRemove = new List<Bonus>();
+            foreach (var bonus in ListBonus)
+            {
+                if (bonus.getRectangle().Intersects(Raquette.getRectangle()))
+                {
+                    // Applique le bonus
+                    switch (bonus.TypeBonus)
+                    {
+                        case TypeBonus.Aucun:
+                            break;
+                        case TypeBonus.RaquetteAgrandie:
+                            Bonus.AgrandirLaRaquette(this);
+                            break;
+                        case TypeBonus.RaquetteReduite:
+                            Bonus.RéduireLaRaquette(this);
+                            break;
+                        case TypeBonus.VitesseBalleAugmentée:
+                            Bonus.AugmenterVitesseBalle(this);
+                            break;
+                        default:
+                            break;
+                    }
+                    ToRemove.Add(bonus);
+                }
+            }
+            foreach (var bonus in ToRemove)
+            {
+                ListBonus.Remove(bonus);
+            }
         }
 
         /// <summary>
@@ -178,6 +234,11 @@ namespace Casse_Brique
                 int nbr = murDeBrique.getNombreBriquesRestantes();
                 spriteBatch.DrawString(font_position, ( nbr == 0 ? "Gagne !!" : nbr.ToString()), new Vector2(10, 10), Color.Red);
                 spriteBatch.DrawString(font_log, Log, new Vector2(400, 10), Color.Blue);
+                //bonus.Draw(spriteBatch, gameTime);
+                foreach (var bonus in ListBonus)
+                {
+                    bonus.Draw(spriteBatch, gameTime);
+                }
             spriteBatch.End();
 
             base.Draw(gameTime);

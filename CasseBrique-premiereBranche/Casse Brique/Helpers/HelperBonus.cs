@@ -11,8 +11,24 @@ namespace Casse_Brique.Helpers
     {
         private static Random rdm = new Random(DateTime.Now.Millisecond);
         public static List<Bonus> ListBonus = new List<Bonus>();
+        public static Dictionary<string, int> ListBonusDict = new Dictionary<string, int>();
+        private static int vitesseBonus = 2;
 
-        public static Bonus GénérerBonusAléa() { return GénérerBonusAléa(ListBonus); }
+        public static void InitializeListBonus(Game1 game)
+        {
+            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.RaquetteAgrandie, 40));
+            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.RaquetteReduite, 40));
+            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.VitesseBalleAugmentée, 40));
+            /*ListBonusDict.Add("++", 60);
+            ListBonusDict.Add("+", 60);
+            ListBonusDict.Add("--", 60);
+            ListBonusDict.Add("-", 60);*/
+        }
+
+        public static Bonus GénérerBonusAléa()
+        {
+            return GénérerBonusAléa(ListBonus);
+        }
 
         public static Bonus GénérerBonusAléa(List<Bonus> ListBonus)
         {
@@ -21,6 +37,8 @@ namespace Casse_Brique.Helpers
             int chance = GénérerChance();
 
             ListBonusAvecMemePourcentage = GetAllBonusWithPourcentage(ListBonus, chance);
+
+            if( ListBonusAvecMemePourcentage.Count == 0 ) return new Bonus(null, 0, 0, 0, TypeBonus.Aucun, 101);
 
             return ListBonusAvecMemePourcentage[rdm.Next(ListBonusAvecMemePourcentage.Count - 1)];
         }
@@ -32,7 +50,16 @@ namespace Casse_Brique.Helpers
 
         private static List<Bonus> GetAllBonusWithPourcentage(List<Bonus> ListBonus, int pourcentage)
         {
-            return ListBonus.Where(brique => pourcentage < brique.Pourcentage).ToList();
+            List<Bonus> ListBonusAvecPourcentage = new List<Bonus>();
+            foreach (var bonus in ListBonus)
+	        {
+                if(pourcentage < bonus.Pourcentage)
+                {
+                    ListBonusAvecPourcentage.Add(bonus);
+                }
+	        }
+
+            return ListBonusAvecPourcentage;// ListBonus.Where(brique => pourcentage < brique.Pourcentage).ToList();
         }
     }
 }
