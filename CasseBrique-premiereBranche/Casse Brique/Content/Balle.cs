@@ -42,10 +42,10 @@ namespace Casse_Brique
             if(Aimanté == true && colisionWithRaquette == true)
             {
                 Vitesse = 0;
-                //_rectangle.X += (int)(game.Raquette.Vitesse * game.Raquette.getDirection().X);
-                Position.X += game.Raquette.Vitesse * game.Raquette.getDirection().X;
+                _rectangle.X += (int)(game.Raquette.Vitesse * game.Raquette.getDirection().X);
+                Position.X += (int)(game.Raquette.Vitesse * game.Raquette.getDirection().X);
                 //Position.X = game.Raquette.Position.X/2 - _rectangle.Width/2;
-                //Position.Y = game.Raquette.Position.Y - Game1.ESPACE_BALLE_RAQUETTE_INIT;
+              //  Position.Y = game.Raquette.Position.Y - Game1.ESPACE_BALLE_RAQUETTE_INIT;
             }
             //Direction.X = Direction.X * Boost;
             //Direction.Y = Direction.Y * Boost;

@@ -105,7 +105,7 @@ namespace Casse_Brique
 
             // TODO: use this.Content to load your game content here
             Background.LoadContent(Content, "paysage-bonbon");
-            Raquette.LoadContent(Content, "barre");
+            Raquette.LoadContent(Content, "Mars_chocolate_bar");
             
             font_position = Content.Load<SpriteFont>("position");
             font_log = Content.Load<SpriteFont>("position");
@@ -159,6 +159,7 @@ namespace Casse_Brique
             {
                 balle.Aimanté = false;
                 balle.Position.Y -= 5;
+                balle._rectangle.X -= 5;
                 balle.Vitesse = 5;
             }
             if(keyboardState.IsKeyDown(Keys.Space) && !lastKeyboardState.IsKeyDown(Keys.Space))
