@@ -125,13 +125,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ferrero doré - Copie.png">
-      <Name>ferrero doré - Copie</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Wallpaper.jpg">
       <Name>Wallpaper</Name>
       <Importer>TextureImporter</Importer>
@@ -148,6 +141,13 @@
   <ItemGroup>
     <Compile Include="paysage-bonbon.jpg">
       <Name>paysage-bonbon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Mars_chocolate_bar.png">
+      <Name>Mars_chocolate_bar</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

@@ -107,7 +107,7 @@ namespace Casse_Brique
 
             // TODO: use this.Content to load your game content here
             Background.LoadContent(Content, "paysage-bonbon");
-            Raquette.LoadContent(Content, "carambar (2)");
+            Raquette.LoadContent(Content, "Mars_chocolate_bar");
             
             font_position = Content.Load<SpriteFont>("position");
             font_log = Content.Load<SpriteFont>("position");
