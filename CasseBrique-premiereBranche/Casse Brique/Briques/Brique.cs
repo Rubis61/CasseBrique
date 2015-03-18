@@ -26,6 +26,17 @@ namespace Casse_Brique
             Vie = 1;
             isActive = true;
         }
+        public bool Hit()
+        {
+            Vie -= 1;
+            if (IsInfinite == true) return false;
+            if(Vie <= 0)
+            {
+                isActive = false;
+                return true;
+            }
+            return false;
+        }
 
         public override void LoadContent(ContentManager content, string nom)
         {

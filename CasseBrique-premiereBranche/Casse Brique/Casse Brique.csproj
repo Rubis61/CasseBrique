@@ -50,7 +50,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Briques\BriqueDoubleCoup.cs" />
     <Compile Include="Briques\BriqueIncassable.cs" />
+    <Compile Include="Briques\BriqueInvisible.cs" />
+    <Compile Include="Briques\BriqueMouvante.cs" />
+    <Compile Include="Briques\BriqueTripleCoup.cs" />
     <Compile Include="Briques\BriqueVide.cs" />
     <Compile Include="Content\Background.cs" />
     <Compile Include="Content\Balle.cs" />

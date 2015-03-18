@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 
-namespace Casse_Brique.Briques
+namespace Casse_Brique
 {
     class BriqueIncassable : Brique
     {
@@ -18,7 +18,6 @@ namespace Casse_Brique.Briques
         {
             IsInfinite = true;
             Vie = 1;
-            _texture = game.Content.Load<Texture2D>("brick016");
         }
     }
 }
