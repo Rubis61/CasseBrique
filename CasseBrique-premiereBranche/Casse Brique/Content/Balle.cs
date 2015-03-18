@@ -17,12 +17,14 @@ namespace Casse_Brique
         public bool Aimanté { get; set; }
         private float Boost = 1;
         private Vector2 normal;
+        public bool IsInvincible { get; set; }
 
         public Balle(Game1 game, int vitesse, float dirX, float dirY)
             : base(game, vitesse, dirX, dirY)
         {
             Boost = 1;
             Aimanté = false;
+            IsInvincible = false;
         }
 
         public override void Update(GameTime gametime, KeyboardState keyboardState)
@@ -141,6 +143,9 @@ namespace Casse_Brique
 
             if (!collideWithBrique.IsEmpty) // Collision entre la balle et une brique OK
             {
+                // Si balle invincible return
+                if (IsInvincible) return;
+
                 Vector2 milieuBalle = new Vector2(Position.X + _rectangle.Width / 2, Position.Y + _rectangle.Height / 2);
 
                 if (Direction.X == 1) // Direction de la balle vers la droite
@@ -198,7 +203,7 @@ namespace Casse_Brique
 
         public override void LoadContent(ContentManager content, string nom)
         {
-            _texture = game.Content.Load<Texture2D>("balle");
+            _texture = game.Content.Load<Texture2D>(nom);
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gametime)

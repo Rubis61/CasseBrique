@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Casse_Brique.Content
 {
-    public enum TypeBonus { Aucun, RaquetteAgrandie, RaquetteReduite, VitesseBalleAugmentée, VitesseBalleRéduite };
+    public enum TypeBonus { Aucun, RaquetteAgrandie, RaquetteReduite, VitesseBalleAugmentée, VitesseBalleRéduite, BalleInvincible };
 
     public class Bonus : GameObject
     {

@@ -49,8 +49,11 @@ namespace Casse_Brique
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
             graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
+            graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
         }
 
         public void AjouterBonus(Bonus bonus, int x, int y)
@@ -87,7 +90,6 @@ namespace Casse_Brique
             ListBonus = new List<Bonus>();
             Log = "";
 
-            //murDeBrique.générerMurDeBriqueDeBase();
             murDeBrique.chargerBriques(1);
             murDeBrique.initialiserBriques();
 
@@ -105,7 +107,7 @@ namespace Casse_Brique
 
             // TODO: use this.Content to load your game content here
             Background.LoadContent(Content, "paysage-bonbon");
-            Raquette.LoadContent(Content, "barre");
+            Raquette.LoadContent(Content, "carambar (2)");
             
             font_position = Content.Load<SpriteFont>("position");
             font_log = Content.Load<SpriteFont>("position");
@@ -159,6 +161,7 @@ namespace Casse_Brique
             {
                 balle.Aimanté = false;
                 balle.Position.Y -= 5;
+                balle._rectangle.Y -= 5;
                 balle.Vitesse = 5;
             }
             if(keyboardState.IsKeyDown(Keys.Space) && !lastKeyboardState.IsKeyDown(Keys.Space))
@@ -166,7 +169,7 @@ namespace Casse_Brique
                 isPaused = !isPaused;
             }
             
-            if(isPaused)
+            if(!isPaused)
             {
                 Raquette.Update(gameTime, keyboardState);
                 balle.Update(gameTime, keyboardState);
@@ -211,6 +214,11 @@ namespace Casse_Brique
                             break;
                         case TypeBonus.VitesseBalleRéduite:
                             Bonus.RéduireVitesseBalle(this);
+                            break;
+                        case TypeBonus.BalleInvincible:
+                            balle.IsInvincible = true;
+                            balle.LoadContent(Content, "ferrero doré - copie");
+                            balle.Initialize((int)balle.Position.X, (int)balle.Position.Y, balle.getTexture().Width, balle.getTexture().Height);
                             break;
                         default:
                             break;
