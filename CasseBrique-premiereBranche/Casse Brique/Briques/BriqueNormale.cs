@@ -19,7 +19,6 @@ namespace Casse_Brique
             IsInfinite = false;
             isActive = true;
             Vie = 1;
-            isActive = true;
             //_texture = game.Content.Load<Texture2D>("brick016");
         }
     }

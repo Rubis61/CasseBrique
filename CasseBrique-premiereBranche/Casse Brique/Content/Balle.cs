@@ -15,6 +15,8 @@ namespace Casse_Brique
     {
         public bool colisionWithRaquette { get; set; }
         public bool Aimanté { get; set; }
+        public int MaxSpeed { get; set; }
+        public int MinSpeed { get; set; }
         private float Boost = 1;
         private Vector2 normal;
         public bool IsInvincible { get; set; }
@@ -22,6 +24,8 @@ namespace Casse_Brique
         public Balle(Game1 game, int vitesse, float dirX, float dirY)
             : base(game, vitesse, dirX, dirY)
         {
+            MaxSpeed = 7;
+            MinSpeed = 2;
             Boost = 1;
             Aimanté = false;
             IsInvincible = false;
@@ -144,7 +148,7 @@ namespace Casse_Brique
             if (!collideWithBrique.IsEmpty) // Collision entre la balle et une brique OK
             {
                 // Si balle invincible return
-                if (IsInvincible) return;
+                if (IsInvincible && !brique.IsInfinite) return;
 
                 Vector2 milieuBalle = new Vector2(Position.X + _rectangle.Width / 2, Position.Y + _rectangle.Height / 2);
 

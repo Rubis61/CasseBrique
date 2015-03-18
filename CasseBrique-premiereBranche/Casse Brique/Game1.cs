@@ -187,8 +187,9 @@ namespace Casse_Brique
             }
 
             lastKeyboardState = keyboardState;
-
+            Log = balle.Vitesse.ToString();
             base.Update(gameTime);
+
         }
 
         private void CollideListBonusWithRaquette()
@@ -210,9 +211,11 @@ namespace Casse_Brique
                             Bonus.RéduireLaRaquette(this);
                             break;
                         case TypeBonus.VitesseBalleAugmentée:
+                            if (balle.Vitesse >= balle.MaxSpeed) break;
                             Bonus.AugmenterVitesseBalle(this);
                             break;
                         case TypeBonus.VitesseBalleRéduite:
+                            if (balle.Vitesse <= balle.MinSpeed) break;
                             Bonus.RéduireVitesseBalle(this);
                             break;
                         case TypeBonus.BalleInvincible:

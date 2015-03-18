@@ -160,6 +160,15 @@ namespace Casse_Brique
                 case '1':
                     brique = new BriqueNormale(game, 0, 0, 0);
                     break;
+                case '2':
+                    brique = new BriqueDoubleCoup(game, 0, 0, 0);
+                    break;
+                case '3':
+                    brique = new BriqueTripleCoup(game, 0, 0, 0);
+                    break;
+                case '4':
+                    brique = new BriqueIncassable(game, 0, 0, 0);
+                    break;
                 default: // * pour null
                     brique = new BriqueVide(game, 0, 0, 0);
                     break;
@@ -172,7 +181,18 @@ namespace Casse_Brique
             {
                 foreach (var brique in ligneBrique)
                 {
-                    brique.LoadContent(content, "twix");
+                    switch (brique.GetType().Name)
+                    {
+                        case "BriqueNormale"    : brique.LoadContent(content, "twix");
+                            break;
+                        case "BriqueDoubleCoup" : brique.LoadContent(content, "balisto");
+                            break;
+                        case "BriqueTripleCoup" : brique.LoadContent(content, "lion");
+                            break;
+                        case "BriqueIncassable": brique.LoadContent(content, "kitkat");
+                            break;
+                    };
+
                 }
             }
         }
@@ -203,15 +223,19 @@ namespace Casse_Brique
                             brique  = ligneBriques[ligne][colonne];
                             //ligneBriques[ligne][colonne].unLoadContent();
                             //ligneBriques[ligne][colonne].isActive = false;
-                            Bonus bonus;
-                            Helpers.HelperBonus.InitializeListBonus(game);
-                            if( (bonus = Helpers.HelperBonus.GénérerBonusAléa()) != null )
+                           
+                            if(brique.Hit())
                             {
-                                if (bonus.TypeBonus != TypeBonus.Aucun) game.AjouterBonus(bonus, (int)(brique.Position.X + (brique.getTexture().Width*0.2f  / 2)),
-                                                                                                 (int)(brique.Position.Y + (brique.getTexture().Height*0.2f / 2)));
+                                ligneBriques[ligne][colonne] = new BriqueVide(game, 0, 0, 0);
+                                Bonus bonus;
+                                Helpers.HelperBonus.InitializeListBonus(game);
+                                if ((bonus = Helpers.HelperBonus.GénérerBonusAléa()) != null)
+                                {
+                                    if (bonus.TypeBonus != TypeBonus.Aucun) game.AjouterBonus(bonus, (int)(brique.Position.X + (brique.getTexture().Width * 0.2f / 2)),
+                                                                                                     (int)(brique.Position.Y + (brique.getTexture().Height * 0.2f / 2)));
+                                }             
                             }
-
-                            ligneBriques[ligne][colonne] = new BriqueVide(game, 0, 0, 0);
+                           
 
                             return rectangleCollider;
                         }
@@ -231,7 +255,9 @@ namespace Casse_Brique
             {
                 for (int colonne = 0; colonne < ligneBriques[ligne].Length; colonne++)
                 {
-                    if (ligneBriques[ligne][colonne].GetType().Name != "BriqueVide") nombre++;
+                    if (ligneBriques[ligne][colonne].GetType().Name != "BriqueVide" &&
+                        ligneBriques[ligne][colonne].GetType().Name != "BriqueIncassable" &&
+                        ligneBriques[ligne][colonne].GetType().Name != "BriqueInvisibleIncassable") nombre++;
                 }
             }
             return nombre;
