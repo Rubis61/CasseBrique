@@ -16,11 +16,11 @@ namespace Casse_Brique.Helpers
 
         public static void InitializeListBonus(Game1 game)
         {
-            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.RaquetteAgrandie, 50));
-            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.RaquetteReduite, 50));
-            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.VitesseBalleAugmentée, 50));
-            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.VitesseBalleRéduite, 50));
-            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.BalleInvincible, 50));
+            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.RaquetteAgrandie, 30));
+            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.RaquetteReduite, 30));
+            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.VitesseBalleAugmentée, 30));
+            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.VitesseBalleRéduite, 30));
+            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.BalleInvincible, 5));
             /*ListBonusDict.Add("++", 60);
             ListBonusDict.Add("+", 60);
             ListBonusDict.Add("--", 60);

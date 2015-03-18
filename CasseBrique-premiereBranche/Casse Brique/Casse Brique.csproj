@@ -71,8 +71,12 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
@@ -84,6 +88,10 @@
     <ProjectReference Include="..\CasseBriqueContent\CasseBriqueContent\CasseBriqueContent.csproj">
       <Project>{4cfe9d07-1828-49c4-9250-dc5d2009a16f}</Project>
       <Name>CasseBriqueContent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CasseBriqueTitleMenu\CasseBriqueTitleMenu.csproj">
+      <Project>{0b09ae5e-6f88-4326-8a63-2b07df47b59a}</Project>
+      <Name>CasseBriqueTitleMenu</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
