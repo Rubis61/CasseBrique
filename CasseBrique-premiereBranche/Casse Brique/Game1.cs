@@ -25,6 +25,7 @@ namespace Casse_Brique
         SpriteBatch spriteBatch;
 
         private bool isPaused = true;
+        private bool isWin = false;
 
         const int height = 720;
         const int width = 1280;
@@ -43,6 +44,8 @@ namespace Casse_Brique
         SpriteFont font_position;
         SpriteFont font_log;
         public string Log { get; set; }
+
+        public int nbrBriquesRestantes { get; set; }
 
         public Game1()
             : base()
@@ -164,12 +167,18 @@ namespace Casse_Brique
                 balle._rectangle.Y -= 5;
                 balle.Vitesse = 5;
             }
+            if (keyboardState.IsKeyDown(Keys.F7) && !lastKeyboardState.IsKeyDown(Keys.F7))
+            {
+                balle.LoadContent(Content, "ferrero doré - copie");
+                balle.IsInvincible = true;
+                balle.Initialize((int)balle.Position.X, (int)balle.Position.Y, balle.getTexture().Width, balle.getTexture().Height);
+            }
             if(keyboardState.IsKeyDown(Keys.Space) && !lastKeyboardState.IsKeyDown(Keys.Space))
             {
                 isPaused = !isPaused;
             }
             
-            if(!isPaused)
+            if(!isPaused && !isWin)
             {
                 Raquette.Update(gameTime, keyboardState);
                 balle.Update(gameTime, keyboardState);
@@ -179,6 +188,11 @@ namespace Casse_Brique
                     bonus.Update(gameTime, keyboardState);
                 }
                 CollideListBonusWithRaquette();
+                nbrBriquesRestantes = murDeBrique.getNombreBriquesRestantes();
+                if (nbrBriquesRestantes == 0)
+                {
+                    isWin = true;
+                }
             }
 
             if (keyboardState.IsKeyDown(Keys.R))
@@ -249,8 +263,7 @@ namespace Casse_Brique
                 Raquette.Draw(spriteBatch, gameTime);
                 balle.Draw(spriteBatch, gameTime);
                 murDeBrique.drawBriques(spriteBatch, gameTime);
-                int nbr = murDeBrique.getNombreBriquesRestantes();
-                spriteBatch.DrawString(font_position, ( nbr == 0 ? "Gagne !!" : nbr.ToString()), new Vector2(10, 10), Color.Red);
+                spriteBatch.DrawString(font_position, ( nbrBriquesRestantes == 0 ? "Gagne !!" : nbrBriquesRestantes.ToString()), new Vector2(10, 10), Color.Red);
                 spriteBatch.DrawString(font_log, Log, new Vector2(400, 10), Color.Blue);
                 //bonus.Draw(spriteBatch, gameTime);
                 foreach (var bonus in ListBonus)

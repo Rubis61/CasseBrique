@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 #endregion
 
+using CasseBriqueTitleMenu;
+
 namespace Casse_Brique
 {
 #if WINDOWS || LINUX
@@ -12,21 +14,32 @@ namespace Casse_Brique
     /// </summary>
     public static class Program
     {
-        public static bool restart = true;
+        //private static MainWindow titleMenu = new MainWindow(PlaySolo);
 
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main()
         {
-            while (restart)
-            {
-                restart = false;
-                using (var game = new Game1())
-                    game.Run();
-            }
+            //titleMenu.Show();
+            using (var game = new Game1())
+                game.Run();
         }
+        /*
+        //[STAThread]
+        public static void PlaySolo()
+        {
+            titleMenu.Hide();
+            using (var game = new Game1())
+                game.Run();
+            Main();
+        }
+
+        public static void WaitPlaySolo()
+        {
+            while (titleMenu.Response != UserAction.PlaySolo);
+        }*/
     }
 #endif
 }

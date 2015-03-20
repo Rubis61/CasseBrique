@@ -1,0 +1,19 @@
+﻿<Window x:Class="CasseBriqueTitleMenu.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin"><Setter.Value><Thickness>10</Thickness></Setter.Value></Setter>
+            <Setter Property="Padding"><Setter.Value><Thickness>10</Thickness></Setter.Value></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Jouer" Click="PlaySolo" />
+            <Button Content="Multijoueur"/>
+            <Button Content="Options"/>
+            <Button Content="Quitter"/>
+        </StackPanel>
+    </Grid>
+</Window>
