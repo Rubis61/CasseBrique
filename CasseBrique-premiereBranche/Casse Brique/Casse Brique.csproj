@@ -64,6 +64,7 @@
     <Compile Include="Briques\BriqueBonus.cs" />
     <Compile Include="Content\Bonus.cs" />
     <Compile Include="Content\Joueur.cs" />
+    <Compile Include="Content\YouShouldNotPass.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Content\GameObject.cs" />
     <Compile Include="Helpers\HelperBonus.cs" />
