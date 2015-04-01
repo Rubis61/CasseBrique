@@ -31,12 +31,14 @@ namespace Casse_Brique.Content
         }
         public static void AgrandirLaRaquette(Game1 game)
         {
-            game.Raquette.Agrandir();
+            if(game.Raquette.Scale.X < Raquette.MaxScale) 
+                game.Raquette.Agrandir();
         }
         public static void RéduireLaRaquette(Game1 game)
         {
             //game.Raquette.Initialize(game.Raquette.getRectangle().X - (130 / 2), game.Raquette.getRectangle().Y, game.Raquette.getRectangle().Width / 2, 28);
-            game.Raquette.Reduire();
+            if (game.Raquette.Scale.X > Raquette.MinScale) 
+                game.Raquette.Reduire();
         }
         public static void AugmenterVitesseBalle(Game1 game)
         {
@@ -50,11 +52,12 @@ namespace Casse_Brique.Content
         {
             _texture = game.Content.Load<Texture2D>(nom);
         }
-        public override void Initialize(int posX, int posY, int width, int height )
+        public override void Initialize(float posX, float posY, int width, int height )
         {
-            _rectangle = new Rectangle(posX, posY, (int)(width), (int)(height));
+            //_rectangle = new Rectangle(posX, posY, (int)(width), (int)(height));
             //_rectangle = new Rectangle(posX, posY, (int)(width * 0.15625f), (int)(height * 0.15625f));
-            Position = new Vector2(posX, posY);
+            //Position = new Vector2(posX, posY);
+            base.Initialize(posX, posY, width, height);
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gametime)

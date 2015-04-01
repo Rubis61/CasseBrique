@@ -29,10 +29,12 @@ namespace Casse_Brique
 
         public string getPosition()
         {
-            return " X : " + _rectangle.X + " Y : " + _rectangle.Y;
+            return " X : " + Position.X + " Y : " + Position.Y;
         }
 
         public Vector2 getDirection() { return Direction; }
+        public float GetWidth() { return _texture.Width * Scale.X; }
+        public float GetHeight() { return _texture.Height * Scale.Y; }
 
         public Rectangle getRectangle() { return new Rectangle((int)Position.X, (int)Position.Y, _rectangle.Width, _rectangle.Height); }
         public Texture2D getTexture() { return _texture; }
@@ -46,9 +48,9 @@ namespace Casse_Brique
             //this.__rectangle.Y = _rectangle.Y;
         }
 
-        public virtual void Initialize(int posX, int posY, int width, int height )
+        public virtual void Initialize(float posX, float posY, int width, int height )
         {
-            _rectangle = new Rectangle(posX, posY, width, height);
+            _rectangle = new Rectangle((int)posX, (int)posY, width, height);
             Position = new Vector2(posX, posY);
             //Position = new Vector2(posX, posY);
         }

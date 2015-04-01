@@ -49,7 +49,7 @@ namespace Casse_Brique
             {
                 Vitesse = 0;
                 _rectangle.X += (int)(game.Raquette.Vitesse * game.Raquette.getDirection().X);
-                Position.X += (int)(game.Raquette.Vitesse * game.Raquette.getDirection().X);
+                Position.X += game.Raquette.Vitesse * game.Raquette.getDirection().X;
                 //Position.X = game.Raquette.Position.X/2 - _rectangle.Width/2;
               //  Position.Y = game.Raquette.Position.Y - Game1.ESPACE_BALLE_RAQUETTE_INIT;
             }
@@ -65,6 +65,10 @@ namespace Casse_Brique
             //Position.Y += (int)normal.Y;
 
             base.Update(gametime, keyboardState);
+
+            //Position.X += normal.X;
+            //_rectangle.X = (int)Position.X;
+            //_rectangle.Y = (int)Position.Y;
         }
 
         private void collideWithScreen(int width, int height)
@@ -91,7 +95,7 @@ namespace Casse_Brique
         public float collideWithRaquette()
         {
             //float boost = 1;
-            if (game.Raquette.getRectangle().Intersects(_rectangle)) // Détection collision entre la balle et la raquete
+            if (game.Raquette.getRectangle().Intersects(_rectangle)) // Détection collision entre la balle et la raquette
             {
                 colisionWithRaquette = true;
                 game.Log = "Intersection !!";
@@ -108,17 +112,21 @@ namespace Casse_Brique
                 */
 
                 float distanceDroiteGauche = raquette.getRectangle().Width;
-                float positionXballe = Position.X - (raquette.getRectangle().X - raquette.getRectangle().Width / 2);
+                //float positionXballe = Position.X - (raquette.getRectangle().X - raquette.getRectangle().Width / 2);
+                float positionXballe = Position.X - raquette.getRectangle().X;
                 float pourcentage = positionXballe / distanceDroiteGauche;
 
-                if(pourcentage < 0.33f)
+                if (pourcentage < 0.33f)
                 {
-                    normal = new Vector2(-0.196f, -0.981f);
+                    //normal = new Vector2(-0.196f, -0.981f);
+                    normal = new Vector2(-0.6f, -0.981f);
                 }
                 else if (pourcentage > 0.66f)
                 {
-                    normal = new Vector2(0.196f, -0.981f);
+                    //normal = new Vector2(0.196f, -0.981f);
+                    normal = new Vector2(0.6f, -0.981f);
                 }
+                else normal = new Vector2(1, 1);
                 /*
                 if (boostGauche)
                 {
@@ -159,10 +167,12 @@ namespace Casse_Brique
                         if (collideWithBrique.X > milieuBalle.X) // Collision bord gauche de la brique
                         {
                             Direction.X = -1; // projection vers la gauche
+                            Position.X = collideWithBrique.X;
                         }
                         else if (collideWithBrique.Y + collideWithBrique.Height == brique.getRectangle().Y + brique.getRectangle().Height) // Collision bord bas
                         {
                             Direction.Y = 1; // projection vers le bas
+                            Position.Y = collideWithBrique.Y + collideWithBrique.Height;
                         }
                     }
                     else // La balle descend

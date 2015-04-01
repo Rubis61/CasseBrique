@@ -26,6 +26,8 @@ namespace Casse_Brique
 
         private bool isPaused = true;
         private bool isWin = false;
+        private bool isGameOver = false;
+        private bool isAdmin = false;
 
         const int height = 720;
         const int width = 1280;
@@ -96,6 +98,9 @@ namespace Casse_Brique
             murDeBrique.chargerBriques(1);
             murDeBrique.initialiserBriques();
 
+            isPaused = true;
+            isGameOver = false;
+
             base.Initialize();
         }
 
@@ -140,45 +145,58 @@ namespace Casse_Brique
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (keyboardState.IsKeyDown(Keys.F1) && !lastKeyboardState.IsKeyDown(Keys.F1))
+            if (isAdmin)
             {
-                Bonus.AgrandirLaRaquette(this);
+                if (keyboardState.IsKeyDown(Keys.F1) && !lastKeyboardState.IsKeyDown(Keys.F1))
+                {
+                    Bonus.AgrandirLaRaquette(this);
+                }
+                if (keyboardState.IsKeyDown(Keys.F2) && !lastKeyboardState.IsKeyDown(Keys.F2))
+                {
+                    Bonus.RéduireLaRaquette(this);
+                }
+                if (keyboardState.IsKeyDown(Keys.F3) && !lastKeyboardState.IsKeyDown(Keys.F3))
+                {
+                    Bonus.RéduireVitesseBalle(this);
+                }
+                if (keyboardState.IsKeyDown(Keys.F4) && !lastKeyboardState.IsKeyDown(Keys.F4))
+                {
+                    Bonus.AugmenterVitesseBalle(this);
+                }
+                if (keyboardState.IsKeyDown(Keys.F5) && !lastKeyboardState.IsKeyDown(Keys.F5))
+                {
+                    balle.Aimanté = true;
+                }
+                // F6 a définir
+                if (keyboardState.IsKeyDown(Keys.F7) && !lastKeyboardState.IsKeyDown(Keys.F7))
+                {
+                    balle.LoadContent(Content, "ferrero doré - copie");
+                    balle.IsInvincible = true;
+                    balle.Initialize((int)balle.Position.X, (int)balle.Position.Y, balle.getTexture().Width, balle.getTexture().Height);
+                }
             }
-            if (keyboardState.IsKeyDown(Keys.F2) && !lastKeyboardState.IsKeyDown(Keys.F2))
-            {
-                Bonus.RéduireLaRaquette(this);
-            }
-            if (keyboardState.IsKeyDown(Keys.F3) && !lastKeyboardState.IsKeyDown(Keys.F3))
-            {
-                Bonus.RéduireVitesseBalle(this);
-            }
-            if (keyboardState.IsKeyDown(Keys.F4) && !lastKeyboardState.IsKeyDown(Keys.F4))
-            {
-                Bonus.AugmenterVitesseBalle(this);
-            }
-            if (keyboardState.IsKeyDown(Keys.F5) && !lastKeyboardState.IsKeyDown(Keys.F5))
-            {
-                balle.Aimanté = true;
-            }
-            if (keyboardState.IsKeyDown(Keys.F6) && !lastKeyboardState.IsKeyDown(Keys.F6))
-            {
-                balle.Aimanté = false;
-                balle.Position.Y -= 5;
-                balle._rectangle.Y -= 5;
-                balle.Vitesse = 5;
-            }
-            if (keyboardState.IsKeyDown(Keys.F7) && !lastKeyboardState.IsKeyDown(Keys.F7))
-            {
-                balle.LoadContent(Content, "ferrero doré - copie");
-                balle.IsInvincible = true;
-                balle.Initialize((int)balle.Position.X, (int)balle.Position.Y, balle.getTexture().Width, balle.getTexture().Height);
-            }
-            if(keyboardState.IsKeyDown(Keys.Space) && !lastKeyboardState.IsKeyDown(Keys.Space))
+
+            if (keyboardState.IsKeyDown(Keys.P) && !lastKeyboardState.IsKeyDown(Keys.P))
             {
                 isPaused = !isPaused;
             }
+            if (keyboardState.IsKeyDown(Keys.F8) && !lastKeyboardState.IsKeyDown(Keys.F8))
+            {
+                isAdmin = !isAdmin;
+            }
+            if(keyboardState.IsKeyDown(Keys.Space) && !lastKeyboardState.IsKeyDown(Keys.Space))
+            {
+                if (isPaused) isPaused = false;
+                else
+                {
+                    balle.Aimanté = false;
+                    balle.Position.Y -= 5;
+                    balle._rectangle.Y -= 5;
+                    balle.Vitesse = 5;
+                }
+            }
             
-            if(!isPaused && !isWin)
+            if(!isPaused && !isWin && !isGameOver)
             {
                 Raquette.Update(gameTime, keyboardState);
                 balle.Update(gameTime, keyboardState);
@@ -193,6 +211,8 @@ namespace Casse_Brique
                 {
                     isWin = true;
                 }
+
+                if(!isAdmin) GameOver();
             }
 
             if (keyboardState.IsKeyDown(Keys.R))
@@ -201,9 +221,9 @@ namespace Casse_Brique
             }
 
             lastKeyboardState = keyboardState;
-            Log = balle.Vitesse.ToString();
-            base.Update(gameTime);
+            Log = "Speed : " + balle.Vitesse.ToString() + " Scale : " + Raquette.Scale.X;
 
+            base.Update(gameTime);
         }
 
         private void CollideListBonusWithRaquette()
@@ -246,6 +266,15 @@ namespace Casse_Brique
             foreach (var bonus in ToRemove)
             {
                 ListBonus.Remove(bonus);
+            }
+        }
+
+        private void GameOver()
+        {
+            if( (balle.Position.Y + balle.getTexture().Height) > (Raquette.Position.Y + Raquette.GetHeight() * 1 / 2) )
+            {
+                //balle.Position.Y = (Raquette.Position.Y + Raquette.GetHeight() * 1 / 4);
+                isGameOver = true;
             }
         }
 

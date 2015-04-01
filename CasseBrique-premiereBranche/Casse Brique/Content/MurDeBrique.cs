@@ -226,6 +226,7 @@ namespace Casse_Brique
                            
                             if(brique.Hit())
                             {
+                                
                                 ligneBriques[ligne][colonne] = new BriqueVide(game, 0, 0, 0);
                                 Bonus bonus;
                                 Helpers.HelperBonus.InitializeListBonus(game);
@@ -235,7 +236,6 @@ namespace Casse_Brique
                                                                                                      (int)(brique.Position.Y + (brique.getTexture().Height * 0.2f / 2)));
                                 }             
                             }
-                           
 
                             return rectangleCollider;
                         }

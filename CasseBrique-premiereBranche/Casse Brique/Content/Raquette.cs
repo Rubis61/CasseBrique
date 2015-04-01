@@ -13,6 +13,9 @@ namespace Casse_Brique
 {
     public class Raquette : GameObject
     {
+        public static float MaxScale = 1.9f;
+        public static float MinScale = 1;
+
         public Raquette(Game1 game, int vitesse, float dirX, float dirY)
             : base(game, vitesse, dirX, dirY)
         {
@@ -43,16 +46,18 @@ namespace Casse_Brique
 
         public void Agrandir()
         {
-            Initialize(game.Raquette.getRectangle().X - (130 / 2), game.Raquette.getRectangle().Y, game.Raquette.getRectangle().Width*2, 28);
+            Initialize(game.Raquette.Position.X, game.Raquette.Position.Y, game.Raquette.getRectangle().Width + 39, 28);
             //Initialize(_rectangle.X - (17 / 2), _rectangle.Y, (int)(_rectangle.Width * 1.1), 28);
-            Scale.X *= 2f;
+            Position.X -= 19.5f;
+            Scale.X = (float)Math.Round(Scale.X += 0.3f, 2);
         }
 
         public void Reduire()
         {
-            Initialize(game.Raquette.getRectangle().X - (130 / 2), game.Raquette.getRectangle().Y, game.Raquette.getRectangle().Width / 2, 28);
+            Initialize(game.Raquette.Position.X, game.Raquette.Position.Y, game.Raquette.getRectangle().Width - 39, 28);
             //Initialize(_rectangle.X - (17 / 2), _rectangle.Y, (int)(_rectangle.Width / 1.1), 28);
-            Scale.X /= 2f;
+            Position.X += 19.5f;
+            Scale.X = (float)Math.Round(Scale.X -= 0.3f, 2);
         }
 
         public override void LoadContent(ContentManager content, string nom)
