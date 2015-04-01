@@ -21,6 +21,7 @@ namespace Casse_Brique.Helpers
             ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.VitesseBalleAugmentée, 30));
             ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.VitesseBalleRéduite, 30));
             ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.BalleInvincible, 5));
+            ListBonus.Add(new Bonus(game, vitesseBonus, 0, 1, TypeBonus.VieSupplementaire, 10));
             /*ListBonusDict.Add("++", 60);
             ListBonusDict.Add("+", 60);
             ListBonusDict.Add("--", 60);

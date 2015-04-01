@@ -32,10 +32,11 @@ namespace Casse_Brique
         public int getHeight() { return height; }
         public int getWidth() { return width; }
         private KeyboardState lastKeyboardState;
-
+        public int CurrentLevel { get; set; }
         public Background Background { get; set; }
         public Raquette Raquette { get; private set; }
         public Balle balle;
+        public Joueur joueur;
         
         public List<Bonus> ListBonus { get; set; }
         
@@ -43,6 +44,7 @@ namespace Casse_Brique
         public Bonus bonus;
         SpriteFont font_position;
         SpriteFont font_log;
+        SpriteFont InfoJoueur;
         public string Log { get; set; }
 
         public int nbrBriquesRestantes { get; set; }
@@ -84,6 +86,8 @@ namespace Casse_Brique
         {
             // TODO: Add your initialization logic here
             Background = new Background(this);
+
+            joueur = new Joueur("Anni");
             Raquette = new Raquette(this, 10, 0, 0);
             Raquette.Initialize((width/2)-(135/2)-3, height * 19 / 20, 130, 28);
             balle = new Balle(this, 4, 1, -1);
@@ -111,7 +115,7 @@ namespace Casse_Brique
             // TODO: use this.Content to load your game content here
             Background.LoadContent(Content, "paysage-bonbon");
             Raquette.LoadContent(Content, "Mars_chocolate_bar");
-            
+            InfoJoueur = Content.Load<SpriteFont>("position");
             font_position = Content.Load<SpriteFont>("position");
             font_log = Content.Load<SpriteFont>("position");
             balle.LoadContent(Content, "balle");
@@ -213,6 +217,8 @@ namespace Casse_Brique
             {
                 if (bonus.getRectangle().Intersects(Raquette.getRectangle()))
                 {
+                    //On calcule le score
+                    joueur.CalculScoreBonus(bonus);
                     // Applique le bonus
                     switch (bonus.TypeBonus)
                     {
@@ -236,6 +242,9 @@ namespace Casse_Brique
                             balle.IsInvincible = true;
                             balle.LoadContent(Content, "ferrero doré - copie");
                             balle.Initialize((int)balle.Position.X, (int)balle.Position.Y, balle.getTexture().Width, balle.getTexture().Height);
+                            break;
+                        case TypeBonus.VieSupplementaire:
+                            Bonus.VieSupplementaire(this);
                             break;
                         default:
                             break;
@@ -265,6 +274,7 @@ namespace Casse_Brique
                 murDeBrique.drawBriques(spriteBatch, gameTime);
                 spriteBatch.DrawString(font_position, ( nbrBriquesRestantes == 0 ? "Gagne !!" : nbrBriquesRestantes.ToString()), new Vector2(10, 10), Color.Red);
                 spriteBatch.DrawString(font_log, Log, new Vector2(400, 10), Color.Blue);
+                spriteBatch.DrawString(InfoJoueur, "Joueur : " + joueur.Pseudo + " Score " + joueur.Score + " Nbr Life : " + joueur.NbrLife, new Vector2(700, 10), Color.Black);
                 //bonus.Draw(spriteBatch, gameTime);
                 foreach (var bonus in ListBonus)
                 {

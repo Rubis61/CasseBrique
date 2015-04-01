@@ -223,16 +223,21 @@ namespace Casse_Brique
                             brique  = ligneBriques[ligne][colonne];
                             //ligneBriques[ligne][colonne].unLoadContent();
                             //ligneBriques[ligne][colonne].isActive = false;
-                           
-                            if(brique.Hit())
+   
+                            if(brique.Hit()) // Si la brique est détruite
                             {
+
+                                game.joueur.CalculScoreBrique(brique);
                                 ligneBriques[ligne][colonne] = new BriqueVide(game, 0, 0, 0);
                                 Bonus bonus;
                                 Helpers.HelperBonus.InitializeListBonus(game);
                                 if ((bonus = Helpers.HelperBonus.GénérerBonusAléa()) != null)
                                 {
-                                    if (bonus.TypeBonus != TypeBonus.Aucun) game.AjouterBonus(bonus, (int)(brique.Position.X + (brique.getTexture().Width * 0.2f / 2)),
-                                                                                                     (int)(brique.Position.Y + (brique.getTexture().Height * 0.2f / 2)));
+                                    if (bonus.TypeBonus != TypeBonus.Aucun)
+                                    {
+                                        game.AjouterBonus(bonus, (int)(brique.Position.X + (brique.getTexture().Width * 0.2f / 2)),
+                                                                                                      (int)(brique.Position.Y + (brique.getTexture().Height * 0.2f / 2)));
+                                    }
                                 }             
                             }
                            
