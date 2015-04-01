@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Casse_Brique.Content
 {
-    public enum TypeBonus { Aucun, RaquetteAgrandie, RaquetteReduite, VitesseBalleAugmentée, VitesseBalleRéduite, BalleInvincible };
+    public enum TypeBonus { Aucun, RaquetteAgrandie, RaquetteReduite, VitesseBalleAugmentée, VitesseBalleRéduite, BalleInvincible, VieSupplementaire };
 
     public class Bonus : GameObject
     {
@@ -28,6 +28,10 @@ namespace Casse_Brique.Content
         {
             TypeBonus = typeBonus;
             Pourcentage = pourcentage;
+        }
+        public static void VieSupplementaire(Game1 game)
+        {
+            game.joueur.NbrLife++;
         }
         public static void AgrandirLaRaquette(Game1 game)
         {

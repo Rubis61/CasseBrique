@@ -36,6 +36,7 @@
     <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -62,6 +63,7 @@
     <Compile Include="Briques\BriqueNormale.cs" />
     <Compile Include="Briques\BriqueBonus.cs" />
     <Compile Include="Content\Bonus.cs" />
+    <Compile Include="Content\Joueur.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Content\GameObject.cs" />
     <Compile Include="Helpers\HelperBonus.cs" />
