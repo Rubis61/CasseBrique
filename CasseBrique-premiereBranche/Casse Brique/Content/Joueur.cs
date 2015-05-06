@@ -52,13 +52,9 @@ namespace Casse_Brique.Content
             return Score;
         }
 
-        public void EnleverUneVie()
+        public int EnleverUneVie()
         {
-            NbrLife--;
-            if (NbrLife < 0)
-            {
-                
-            }
+            return NbrLife--;
         }
     }
 }

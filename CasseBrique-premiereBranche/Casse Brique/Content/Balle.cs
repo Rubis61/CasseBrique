@@ -18,7 +18,7 @@ namespace Casse_Brique
         public int MaxSpeed { get; set; }
         public int MinSpeed { get; set; }
         private float Boost = 1;
-        private Vector2 normal;
+        public Vector2 normal;
         public bool IsInvincible { get; set; }
 
         public Balle(Game1 game, int vitesse, float dirX, float dirY)
