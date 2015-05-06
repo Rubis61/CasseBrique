@@ -28,6 +28,32 @@ namespace Casse_Brique.Content
         {
             TypeBonus = typeBonus;
             Pourcentage = pourcentage;
+            /*
+            Dictionary<TypeBonus, int> MagasinBonus = new Dictionary<TypeBonus, int>();
+            MagasinBonus[TypeBonus.RaquetteAgrandie] = 10000;
+
+            TypeBonus type = TypeBonus.RaquetteAgrandie;
+            int argent = 999999;
+            switch (type)
+            {
+                case TypeBonus.Aucun:
+                    if (argent >= MagasinBonus[type]) ; // ACHAT
+                    break;
+                case TypeBonus.RaquetteAgrandie:
+                    break;
+                case TypeBonus.RaquetteReduite:
+                    break;
+                case TypeBonus.VitesseBalleAugmentée:
+                    break;
+                case TypeBonus.VitesseBalleRéduite:
+                    break;
+                case TypeBonus.BalleInvincible:
+                    break;
+                case TypeBonus.VieSupplementaire:
+                    break;
+                default:
+                    break;
+            }*/
         }
         public static void VieSupplementaire(Game1 game)
         {

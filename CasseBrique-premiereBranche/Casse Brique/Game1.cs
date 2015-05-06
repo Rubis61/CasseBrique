@@ -19,29 +19,37 @@ namespace Casse_Brique
     /// </summary>
     public class Game1 : Game
     {
+        // --- Statics properties ---
         public static int ESPACE_BALLE_RAQUETTE_INIT = 40;
 
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
+        // --- Etats ---
         private bool isPaused = true;
         private bool isWin = false;
         private bool isGameOver = false;
         private bool isAdmin = false;
 
+        // --- Graphics ---
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
         const int height = 720;
         const int width = 1280;
         public int getHeight() { return height; }
         public int getWidth() { return width; }
+
+        // --- Keyboard ---
         private KeyboardState lastKeyboardState;
+
+        // --- Levels ---
         public int CurrentLevel { get; set; }
-        public Background Background { get; set; }
+
+        // --- GameObjects ---
         public Raquette Raquette { get; private set; }
         public Balle balle;
         public Joueur joueur;
-        
         public List<Bonus> ListBonus { get; set; }
         
+        // --- Décors ---
+        public Background Background { get; set; }
         public MurDeBrique murDeBrique { get; private set; }
         public Bonus bonus;
         public Magasin magasin;
@@ -49,7 +57,6 @@ namespace Casse_Brique
         SpriteFont font_log;
         SpriteFont InfoJoueur;
         public string Log { get; set; }
-
         public int nbrBriquesRestantes { get; set; }
 
         public Game1()
@@ -180,7 +187,10 @@ namespace Casse_Brique
                 {
                     balle.Aimanté = true;
                 }
-                // F6 a définir
+                if (keyboardState.IsKeyDown(Keys.F6) && !lastKeyboardState.IsKeyDown(Keys.F6))
+                {
+                    balle.Aimanté = false;
+                }
                 if (keyboardState.IsKeyDown(Keys.F7) && !lastKeyboardState.IsKeyDown(Keys.F7))
                 {
                     balle.LoadContent(Content, "ferrero doré - copie");
@@ -189,7 +199,7 @@ namespace Casse_Brique
                 }
             }
             if (keyboardState.IsKeyDown(Keys.P) && !lastKeyboardState.IsKeyDown(Keys.P))
-            {    
+            {
                 isPaused = !isPaused;
             }
             if (keyboardState.IsKeyDown(Keys.F8) && !lastKeyboardState.IsKeyDown(Keys.F8))
@@ -199,12 +209,11 @@ namespace Casse_Brique
             if(keyboardState.IsKeyDown(Keys.Space) && !lastKeyboardState.IsKeyDown(Keys.Space))
             {
                 if (isPaused) isPaused = false;
-                else
+                else if (!isGameOver)
                 {
-                    balle.Aimanté = false;
                     balle.Position.Y -= 5;
                     balle._rectangle.Y -= 5;
-                    balle.Vitesse = 5;
+                    balle.Vitesse = 4;
                 }
             }
             
@@ -292,8 +301,8 @@ namespace Casse_Brique
             {
                 if (joueur.EnleverUneVie() < 1)
                 {
-                    isGameOver = true;
-                }
+                isGameOver = true;
+            }
                 else
                 {
                     Raquette.Initialize((width / 2) - (135 / 2) - 3, height * 19 / 20, 130, 28);
