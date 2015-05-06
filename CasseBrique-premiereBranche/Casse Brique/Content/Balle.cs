@@ -38,13 +38,20 @@ namespace Casse_Brique
 
             collideWithScreen(width, height);
 
-            collideWithBriques();
+            Rectangle futurePosition = new Rectangle(_rectangle.X, _rectangle.Y, _rectangle.Width, _rectangle.Height);
+            for (int i = 1; i <= Vitesse; i++)
+            {
+                futurePosition.X += (int)(Vitesse * Direction.X);
+                futurePosition.Y += (int)(Vitesse * Direction.Y);
+                if (collideWithBriques(futurePosition)) break;
+                else futurePosition = new Rectangle(_rectangle.X, _rectangle.Y, _rectangle.Width, _rectangle.Height); ;
+            }
 
             //Direction.X *= Math.Abs(collideWithRaquette());
             collideWithRaquette();
             Boost = Math.Abs(Boost);
 
-            Direction.X = (Direction.X > 2) ? 2 : (Direction.X < -2) ? -2 : Direction.X;
+            //Direction.X = (Direction.X > 2) ? 2 : (Direction.X < -2) ? -2 : Direction.X;
             if(Aimanté == true && colisionWithRaquette == true)
             {
                 Vitesse = 0;
@@ -66,6 +73,9 @@ namespace Casse_Brique
             //_rectangle.Y += (int)normal.Y;
             //Position.Y += (int)normal.Y;
             //Position.Y += (int)normal.Y;
+
+            _rectangle.X = (int)Position.X;
+            _rectangle.Y = (int)Position.Y;
 
             base.Update(gametime, keyboardState);
 
@@ -98,8 +108,13 @@ namespace Casse_Brique
         public float collideWithRaquette()
         {
             //float boost = 1;
+
             if (game.Raquette.getRectangle().Intersects(_rectangle)) // Détection collision entre la balle et la raquette
             {
+                Rectangle rectCollider = new Rectangle();
+                rectCollider = Rectangle.Intersect(game.Raquette.getRectangle(), _rectangle);
+                //Position.Y -= rectCollider.Height;
+
                 colisionWithRaquette = true;
                 game.Log = "Intersection !!";
 
@@ -151,42 +166,61 @@ namespace Casse_Brique
             return Boost;
         }
 
-        private void collideWithBriques()
+        private bool collideWithBriques(Rectangle rectangle)
         {
             Brique brique;
-            Rectangle collideWithBrique = game.murDeBrique.isCollisionWithBrique(_rectangle, out brique); // demande si il y a collision entre balle et une des briques du mur de brique ( rectangle null si aucune collision )
+            Rectangle collideWithBrique = game.murDeBrique.isCollisionWithBrique(rectangle, out brique); // demande si il y a collision entre balle et une des briques du mur de brique ( rectangle null si aucune collision )
 
             if (!collideWithBrique.IsEmpty) // Collision entre la balle et une brique OK
             {
                 // Si balle invincible return
-                if (IsInvincible && !brique.IsInfinite) return;
+                 if (IsInvincible && !brique.IsInfinite) return true;
 
-                Vector2 milieuBalle = new Vector2(Position.X + _rectangle.Width / 2, Position.Y + _rectangle.Height / 2);
+                //Vector2 milieuBalle = new Vector2(Position.X + _rectangle.Width / 2, Position.Y + _rectangle.Height / 2);
 
                 if (Direction.X == 1) // Direction de la balle vers la droite
                 {
                     if (Direction.Y == -1) // La balle monte
                     {
-                        if (collideWithBrique.X > milieuBalle.X) // Collision bord gauche de la brique
+                        if (collideWithBrique.Width < collideWithBrique.Height) // Collision bord gauche de la brique
                         {
                             Direction.X = -1; // projection vers la gauche
-                            Position.X = collideWithBrique.X;
+                            Position.X -= collideWithBrique.Width;
                         }
-                        else if (collideWithBrique.Y + collideWithBrique.Height == brique.getRectangle().Y + brique.getRectangle().Height) // Collision bord bas
+                        else if (collideWithBrique.Width > collideWithBrique.Height) // Collision bord bas
                         {
                             Direction.Y = 1; // projection vers le bas
-                            Position.Y = collideWithBrique.Y + collideWithBrique.Height;
+                            //Position.Y = collideWithBrique.Y + collideWithBrique.Height;
+                            Position.Y += collideWithBrique.Height;
+                        }
+                        else
+                        {
+                            //Direction.X = -1; // projection vers la gauche
+                            Direction.Y = 1; // projection vers le bas
+                            //Position.X -= collideWithBrique.Width;
+                            Position.Y += collideWithBrique.Height;
                         }
                     }
                     else // La balle descend
                     {
-                        if (collideWithBrique.Y > milieuBalle.Y) // Collision bord haut
+                        if (collideWithBrique.Width > collideWithBrique.Height) // Collision bord haut
                         {
                             Direction.Y = -1; // projection vers le haut
+                            //Position.Y = collideWithBrique.Y - GetHeight();
+                            Position.Y -= collideWithBrique.Height;
                         }
-                        else if (collideWithBrique.X > milieuBalle.X) // Collision bord gauche
+                        else if (collideWithBrique.Width < collideWithBrique.Height) // Collision bord gauche
                         {
                             Direction.X = -1; // projection vers la gauche
+                            //Position.X = collideWithBrique.X - GetWidth();
+                            Position.X -= collideWithBrique.Width;
+                        }
+                        else
+                        {
+                            Direction.Y = -1; // projection vers le haut
+                            //Direction.X = -1; // projection vers la gauche
+                            Position.Y -= collideWithBrique.Height;
+                            //Position.X -= collideWithBrique.Width;
                         }
                     }
                 }
@@ -194,28 +228,54 @@ namespace Casse_Brique
                 {
                     if (Direction.Y == -1) // La balle monte
                     {
-                        if (collideWithBrique.X + collideWithBrique.Width == brique.getRectangle().X + brique.getRectangle().Width) // Collision bord droit
+                        if (collideWithBrique.Width < collideWithBrique.Height) // Collision bord droit
                         {
                             Direction.X = 1; // projection vers la droite
+                            //Position.X = brique.Position.X + brique.GetWidth();
+                            Position.X += collideWithBrique.Width;
                         }
-                        else if (collideWithBrique.Y + collideWithBrique.Height == brique.getRectangle().Y + brique.getRectangle().Height) // Collision bord bas
+                        else if (collideWithBrique.Width > collideWithBrique.Height) // Collision bord bas
                         {
                             Direction.Y = 1; // projection vers le bas
+                            //Position.Y = brique.Position.Y + brique.GetHeight();
+                            Position.Y += collideWithBrique.Height;
+                        }
+                        else
+                        {
+                            //Direction.X = 1; // projection vers la droite
+                            Direction.Y = 1; // projection vers le bas
+                            //Position.X += collideWithBrique.Width;
+                            Position.Y += collideWithBrique.Height;
                         }
                     }
                     else // La balle descend
                     {
-                        if (collideWithBrique.Y > milieuBalle.Y) // Collision bord haut
+                        if (collideWithBrique.Width > collideWithBrique.Height) // Collision bord haut
                         {
                             Direction.Y = -1; // projection vers le haut
+                            //Position.Y = brique.Position.Y - brique.GetHeight();
+                            Position.Y -= collideWithBrique.Height;
                         }
-                        else if (collideWithBrique.X + collideWithBrique.Width == brique.getRectangle().X + brique.getRectangle().Width)//collideWithBrique.Y < milieuBalle.Y) // Collision bord droit
+                        else if (collideWithBrique.Width < collideWithBrique.Height)//collideWithBrique.Y < milieuBalle.Y) // Collision bord droit
                         {
                             Direction.X = 1; // projection vers la droite
+                            //Position.X = brique.Position.X + brique.GetWidth();
+                            Position.X += collideWithBrique.Width;
+                        }
+                        else
+                        {
+                            Direction.Y = -1; // projection vers le haut
+                            //Direction.X = 1; // projection vers la droite
+                            Position.Y -= collideWithBrique.Height;
+                            //Position.X += collideWithBrique.Width;
                         }
                     }
                 }
+
+                return true;
             }
+
+            return false;
         }
 
         public override void LoadContent(ContentManager content, string nom)

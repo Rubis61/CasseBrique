@@ -226,7 +226,6 @@ namespace Casse_Brique
                            
                             if(brique.Hit()) // Si la brique est détruite
                             {
-
                                 game.joueur.CalculScoreBrique(brique);
                                 ligneBriques[ligne][colonne] = new BriqueVide(game, 0, 0, 0);
                                 Bonus bonus;
@@ -237,8 +236,8 @@ namespace Casse_Brique
                                     {
                                         game.AjouterBonus(bonus, (int)(brique.Position.X + (brique.getTexture().Width * 0.2f / 2)),
                                                                                                      (int)(brique.Position.Y + (brique.getTexture().Height * 0.2f / 2)));
-                                }             
-                            }
+                                    }
+                                }
                             }
                            
                             return rectangleCollider;

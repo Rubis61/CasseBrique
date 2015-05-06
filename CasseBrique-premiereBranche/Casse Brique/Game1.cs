@@ -43,6 +43,7 @@ namespace Casse_Brique
         public int CurrentLevel { get; set; }
 
         // --- GameObjects ---
+        public YouShouldNotPass YouShouldNotPass { get; set; }
         public Raquette Raquette { get; private set; }
         public Balle balle;
         public Joueur joueur;
@@ -68,7 +69,9 @@ namespace Casse_Brique
 
             graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
-            graphics.IsFullScreen = true;
+            Window.AllowUserResizing = true;
+            //Window.IsBorderless = true;
+            
             graphics.ApplyChanges();
         }
 
@@ -78,13 +81,13 @@ namespace Casse_Brique
             bonus.Initialize(x, y, bonus.getTexture().Width, bonus.getTexture().Height);
             ListBonus.Add(bonus);
         }
-
+        /*
         public void AjouterBonus(Bonus bonus, Rectangle rect)
         {
             bonus.LoadContent(Content, "m&ms rouge");
             bonus.Initialize(rect.X, rect.Y, rect.Width, rect.Height);
             ListBonus.Add(bonus);
-        }
+        }*/
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -98,9 +101,15 @@ namespace Casse_Brique
             // TODO: Add your initialization logic here
             Background = new Background(this);
 
-            joueur = new Joueur("Anni");
+            joueur = new Joueur("Rubis");
+
             Raquette = new Raquette(this, 10, 0, 0);
             Raquette.Initialize((width/2)-(135/2)-3, height * 19 / 20, 130, 28);
+
+            YouShouldNotPass = new YouShouldNotPass(this, TimeSpan.FromSeconds(15));
+            YouShouldNotPass.Initialize(0, 690,// + Raquette._rectangle.Height + 15,
+                                        width, 122);
+
             balle = new Balle(this, 4, 1, -1);
             balle.Initialize(width/2 - 24/2, Raquette.getRectangle().Y - ESPACE_BALLE_RAQUETTE_INIT, 25,25);
             murDeBrique = new MurDeBrique(this);
@@ -113,6 +122,7 @@ namespace Casse_Brique
 
             isPaused = true;
             isGameOver = false;
+            isWin = false;
 
             base.Initialize();
         }
@@ -129,6 +139,7 @@ namespace Casse_Brique
             // TODO: use this.Content to load your game content here
             Background.LoadContent(Content, "paysage-bonbon");
             Raquette.LoadContent(Content, "Mars_chocolate_bar");
+            YouShouldNotPass.LoadContent(Content, "batons-acidules");
             InfoJoueur = Content.Load<SpriteFont>("position");
             font_position = Content.Load<SpriteFont>("position");
             font_log = Content.Load<SpriteFont>("position");
@@ -178,11 +189,11 @@ namespace Casse_Brique
                 }
                 if (keyboardState.IsKeyDown(Keys.F5) && !lastKeyboardState.IsKeyDown(Keys.F5))
                 {
-                    balle.Aimanté = true;
+                    balle.Aimanté = !balle.Aimanté;
                 }
                 if (keyboardState.IsKeyDown(Keys.F6) && !lastKeyboardState.IsKeyDown(Keys.F6))
                 {
-                    balle.Aimanté = false;
+                    YouShouldNotPass.IsActif = !YouShouldNotPass.IsActif;
                 }
                 if (keyboardState.IsKeyDown(Keys.F7) && !lastKeyboardState.IsKeyDown(Keys.F7))
                 {
@@ -215,6 +226,7 @@ namespace Casse_Brique
             {
                 Raquette.Update(gameTime, keyboardState);
                 balle.Update(gameTime, keyboardState);
+                YouShouldNotPass.Update(gameTime, keyboardState);
 
                 foreach (var bonus in ListBonus)
                 {
@@ -320,6 +332,7 @@ namespace Casse_Brique
                 {
                     bonus.Draw(spriteBatch, gameTime);
                 }
+                YouShouldNotPass.Draw(spriteBatch, gameTime);
             spriteBatch.End();
 
             base.Draw(gameTime);
