@@ -44,6 +44,7 @@ namespace Casse_Brique
         
         public MurDeBrique murDeBrique { get; private set; }
         public Bonus bonus;
+        public Magasin magasin;
         SpriteFont font_position;
         SpriteFont font_log;
         SpriteFont InfoJoueur;
@@ -88,8 +89,8 @@ namespace Casse_Brique
         {
             // TODO: Add your initialization logic here
             Background = new Background(this);
-
             joueur = new Joueur("Anni");
+            magasin = new Magasin();
             Raquette = new Raquette(this, 10, 0, 0);
             Raquette.Initialize((width/2)-(135/2)-3, height * 19 / 20, 130, 28);
             balle = new Balle(this, 4, 1, -1);
@@ -148,12 +149,20 @@ namespace Casse_Brique
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            if (keyboardState.IsKeyDown(Keys.M) && !lastKeyboardState.IsKeyDown(Keys.M))
+            {
+                isPaused = true;
+            }
+            magasin.Update(gameTime, joueur, this, keyboardState, lastKeyboardState, balle);
             if (isAdmin)
             {
                 if (keyboardState.IsKeyDown(Keys.F1) && !lastKeyboardState.IsKeyDown(Keys.F1))
                 {
                     Bonus.AgrandirLaRaquette(this);
+                }
+                if (keyboardState.IsKeyDown(Keys.F9) && !lastKeyboardState.IsKeyDown(Keys.F9))
+                {
+                    joueur.Score = 9999999;
                 }
                 if (keyboardState.IsKeyDown(Keys.F2) && !lastKeyboardState.IsKeyDown(Keys.F2))
                 {
@@ -179,9 +188,8 @@ namespace Casse_Brique
                     balle.Initialize((int)balle.Position.X, (int)balle.Position.Y, balle.getTexture().Width, balle.getTexture().Height);
                 }
             }
-
             if (keyboardState.IsKeyDown(Keys.P) && !lastKeyboardState.IsKeyDown(Keys.P))
-            {
+            {    
                 isPaused = !isPaused;
             }
             if (keyboardState.IsKeyDown(Keys.F8) && !lastKeyboardState.IsKeyDown(Keys.F8))
@@ -278,12 +286,27 @@ namespace Casse_Brique
             }
         }
 
-        private void GameOver()
+        public void GameOver()
         {
             if( (balle.Position.Y + balle.getTexture().Height) > (Raquette.Position.Y + Raquette.GetHeight() * 1 / 2) )
             {
-                //balle.Position.Y = (Raquette.Position.Y + Raquette.GetHeight() * 1 / 4);
-                isGameOver = true;
+                if (joueur.EnleverUneVie() < 1)
+                {
+                    isGameOver = true;
+                }
+                else
+                {
+                    Raquette.Initialize((width / 2) - (135 / 2) - 3, height * 19 / 20, 130, 28);
+                    Raquette.Scale = new Vector2(1, 1);
+                    balle.Vitesse = 4;
+                    balle.Direction = new Vector2(1, -1);
+                    balle.LoadContent(Content, "balle");
+                    balle.IsInvincible = false;
+                    balle.normal = new Vector2(0, 0);
+                    balle.Initialize(width / 2 - 24 / 2, Raquette.getRectangle().Y - ESPACE_BALLE_RAQUETTE_INIT, 25, 25);
+                    ListBonus.Clear();
+                    isPaused = true;
+                }
             }
         }
 

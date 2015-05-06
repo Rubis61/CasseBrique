@@ -21,7 +21,7 @@ namespace Casse_Brique
         //protected int dirY;
         //protected int vitesse;
         //protected Vector2 Position;
-        protected Vector2 Direction;
+        public Vector2 Direction;
         protected Game1 game;
         public Vector2 Scale;
 
@@ -31,6 +31,7 @@ namespace Casse_Brique
         {
             return " X : " + Position.X + " Y : " + Position.Y;
         }
+        
 
         public Vector2 getDirection() { return Direction; }
         public float GetWidth() { return _texture.Width * Scale.X; }

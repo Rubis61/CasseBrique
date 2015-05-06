@@ -17,7 +17,7 @@
   <Class Name="Casse_Brique.GameObject">
     <Position X="2.25" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAQAIAgAAQAAAyAgACIAAAAABAQAAAAYAAAAAAAAAAQ=</HashCode>
+      <HashCode>AAQAIAgAAQAAAyAgACIAAABABAQAAAAYAAAAAEAAAAQ=</HashCode>
       <FileName>Content\GameObject.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,14 +31,14 @@
   <Class Name="Casse_Brique.Program" Collapsed="true">
     <Position X="9" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Casse_Brique.Raquette">
     <Position X="4.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAABAAQAAAAAQ=</HashCode>
+      <HashCode>AAQAAAIAAAAAAgAAAAAAAAAAAAAAAIAAABAAQAAAAAQ=</HashCode>
       <FileName>Content\Raquette.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -74,16 +74,9 @@
     <Position X="4.5" Y="8" Width="1.5" />
     <InheritanceLine Type="Casse_Brique.Brique" FixedToPoint="true">
       <Path>
-        <Point X="0.5" Y="7.031" />
-        <Point X="0.34" Y="7.031" />
-        <Point X="0.34" Y="5.227" />
-        <Point X="2.24" Y="5.227" />
-        <Point X="2.24" Y="0.34" />
-        <Point X="4.41" Y="0.34" />
-        <Point X="4.41" Y="5.09" />
-        <Point X="4.34" Y="5.09" />
-        <Point X="4.34" Y="7.76" />
-        <Point X="5.25" Y="7.76" />
+        <Point X="1.25" Y="8.088" />
+        <Point X="2.257" Y="8.066" Type="JumpStart" />
+        <Point X="2.423" Y="8.062" Type="JumpEnd" />
         <Point X="5.25" Y="8" />
       </Path>
     </InheritanceLine>
@@ -95,7 +88,7 @@
   <Class Name="Casse_Brique.Game1">
     <Position X="6.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QUQAEEAAAQAAAwQAQAACAAAAAAiAQAgAQAQgAAADIAQ=</HashCode>
+      <HashCode>SUQAkEAAAQAAAwQAQgECAACAAAjEQAgAQAQgACADIAQ=</HashCode>
       <FileName>Game1.cs</FileName>
     </TypeIdentifier>
   </Class>
